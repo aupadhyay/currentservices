@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <div className="w-full px-24 py-20 bg-[#FF242F] h-screen relative">
       <div className="absolute top-16">
-        <h1>Current Services</h1>
+        <h1 className="text-white">Current Services</h1>
       </div>
 
       <div className="px-24 py-20">
@@ -62,7 +62,7 @@ export default function Home() {
       </div>
 
       <div className="absolute bottom-20">
-        <h1 className="text-xl">Index</h1>
+        <h1 className="text-xl text-white">Index</h1>
       </div>
     </div>
   )
