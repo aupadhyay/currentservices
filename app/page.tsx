@@ -1,3 +1,5 @@
+import Layout from "./components/Layout"
+
 export default function Home() {
   const services = [
     "Concepting",
@@ -23,11 +25,10 @@ export default function Home() {
   const numColumns = 3
 
   return (
-    <div className="w-full px-24 py-20 bg-[#FF242F] h-screen relative">
-      <div className="absolute top-16">
-        <h1 className="text-white">Current Services</h1>
-      </div>
-
+    <Layout
+      top={<h1 className="text-white">Current Services</h1>}
+      bottom={<h1 className="text-xl text-white">Index</h1>}
+    >
       <div className="px-24 py-20">
         <p className="text-white text-2xl w-3/4">
           Current Services is a cross-disciplinary design practice founded in
@@ -60,10 +61,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-
-      <div className="absolute bottom-20">
-        <h1 className="text-xl text-white">Index</h1>
-      </div>
-    </div>
+    </Layout>
   )
 }
