@@ -1,6 +1,5 @@
-import Link from "@/node_modules/next/link"
 
-export default function Home() {
+export default function FinalSlide() {
     const services = [
         "Concepting",
         "Branding",

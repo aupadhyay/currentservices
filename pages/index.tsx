@@ -1,4 +1,4 @@
-import Layout from "./components/Layout"
+import Layout from "../components/Layout"
 
 export default function Home() {
   const services = [
@@ -26,6 +26,7 @@ export default function Home() {
 
   return (
     <Layout
+      color="[#FF242F]"
       top={<h1 className="text-white">Current Services</h1>}
       bottom={<h1 className="text-xl text-white">Index</h1>}
     >
