@@ -21,26 +21,30 @@ export default function Home() {
     "Print ",
     "Spatial",
     "Events",
-  ]
-  const wordsPerList = 6
-  const numColumns = 3
+  ];
+  const wordsPerList = 6;
+  const numColumns = 3;
 
   const handleClickCS = () => {
     // Handle the click event, such as logging or performing other actions
-    console.log('Link clicked!');
-    router.push('/currentServices');
+    console.log("Link clicked!");
+    router.push("/currentServices");
   };
 
   const handleClickPage = (word: string) => {
     // Handle the click event, such as logging or performing other actions
-    console.log('Link clicked!');
-    router.push('/' + word);
+    console.log("Link clicked!");
+    router.push("/" + word);
   };
 
   return (
     <Layout
       color="[#FF242F]"
-      top={<h1 className="text-white" onClick={handleClickCS}>Current Services</h1>}
+      top={
+        <h1 className="text-white" onClick={handleClickCS}>
+          Current Services
+        </h1>
+      }
       bottom={<h1 className="text-xl text-white">Index</h1>}
     >
       <div className="px-24 py-20">
@@ -64,7 +68,7 @@ export default function Home() {
               {services
                 .slice(
                   columnIndex * wordsPerList,
-                  (columnIndex + 1) * wordsPerList
+                  (columnIndex + 1) * wordsPerList,
                 )
                 .map((word, index) => (
                   <p className="text-white text-2xl mt-1" key={index}>
@@ -76,5 +80,5 @@ export default function Home() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
