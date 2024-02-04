@@ -20,7 +20,7 @@ const getProjects = async () => {
 }
 
 const getProjectById = async (id: string) => {
-  return await get(`${BASE_URL}/projects/${id}`)
+  return await get(`${BASE_URL}/projects/${id}?populate=*`)
 }
 
 const getProjectByName = async (name: string) => {

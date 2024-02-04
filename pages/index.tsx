@@ -1,5 +1,5 @@
 import router from "next/router";
-import Layout from "../components/Layout"
+import Layout from "../components/Layout";
 
 export default function Home() {
   const services = [
