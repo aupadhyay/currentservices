@@ -24,7 +24,7 @@ const getProjectById = async (id: string) => {
 }
 
 const getProjectByName = async (name: string) => {
-  const projects = await get(`${BASE_URL}/projects?filters[name][$eq]=${name}&populate=*`)
+  const projects = await get(`${BASE_URL}/projects?filters[name][$eq]=${name}&populate=slides.cover`)
   if (projects.data.length === 0) {
     return null
   }
