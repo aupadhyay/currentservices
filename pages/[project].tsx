@@ -35,7 +35,7 @@ const ProjectPage = ({ project }) => {
   return (
     <div>
       {project.attributes.slides.map((slide) => (
-        <Layout color="none" top={<Header />}>
+        <Layout color="none" top={<Header />} key={slide.title}>
           <div className="px-24 py-20">
             <p className="text-white text-2xl w-3/4">{slide.description}</p>
           </div>
