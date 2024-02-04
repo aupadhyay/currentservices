@@ -1,3 +1,4 @@
+import router from "next/router";
 import Layout from "../components/Layout"
 
 export default function Home() {
@@ -24,10 +25,22 @@ export default function Home() {
   const wordsPerList = 6
   const numColumns = 3
 
+  const handleClickCS = () => {
+    // Handle the click event, such as logging or performing other actions
+    console.log('Link clicked!');
+    router.push('/currentServices');
+  };
+
+  const handleClickPage = (word: string) => {
+    // Handle the click event, such as logging or performing other actions
+    console.log('Link clicked!');
+    router.push('/' + word);
+  };
+
   return (
     <Layout
       color="[#FF242F]"
-      top={<h1 className="text-white">Current Services</h1>}
+      top={<h1 className="text-white" onClick={handleClickCS}>Current Services</h1>}
       bottom={<h1 className="text-xl text-white">Index</h1>}
     >
       <div className="px-24 py-20">
