@@ -1,4 +1,23 @@
-const BASE_URL = "https://cs.axu.sh/api";
+export const BASE_URL = "https://cs.axu.sh";
+const API_URL = `${BASE_URL}/api`;
+
+export type ISlide = {
+  id: string;
+  title: string;
+  description: string;
+  cover: {
+    id: string;
+    url: string;
+  };
+  text_color?: string;
+};
+
+export type IProject = {
+  id: string;
+  name: string;
+  description: string;
+  slides: ISlide[];
+};
 
 const headers = {
   Authorization: `bearer ${process.env.STRAPI_KEY}`,
@@ -15,21 +34,20 @@ const get = async (url: string) => {
 };
 
 const getProjects = async () => {
-  const project = await get(`${BASE_URL}/projects`);
-  console.log("ova here: ", project);
-  return project.data;
+  const project = await get(`${API_URL}/projects?populate=slides.cover`);
+  return project.data.map((project: any) => project.attributes);
 };
 
 const getProjectById = async (id: string) => {
-  return await get(`${BASE_URL}/projects/${id}?populate=*`);
+  return await get(`${API_URL}/projects/${id}?populate=*`);
 };
 
 const getProjectByName = async (name: string) => {
-  const projects = await get(`${BASE_URL}/projects?filters[name][$eq]=${name}&populate=slides.cover`)
+  const projects = await get(`${API_URL}/projects?filters[name][$eq]=${name}&populate=slides.cover`)
   if (projects.data.length === 0) {
     return null;
   }
-  return projects.data[0];
+  return projects.data[0].attributes;
 };
 
 export { getProjectById, getProjectByName, getProjects };
