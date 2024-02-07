@@ -91,7 +91,9 @@ const ProjectPage = ({
       top: window.innerHeight,
       behavior: "smooth",
     })
-    setSlideNumber((old) => old + 1 > currProject.slides.length - 1 ? old : old + 1)
+    setSlideNumber((old) =>
+      old + 1 > currProject.slides.length - 1 ? old : old + 1
+    )
   }
 
   const prevSlide = () => {
@@ -99,17 +101,17 @@ const ProjectPage = ({
       top: -window.innerHeight,
       behavior: "smooth",
     })
-    setSlideNumber((old) => old - 1 < 0 ? old : old - 1)
+    setSlideNumber((old) => (old - 1 < 0 ? old : old - 1))
   }
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-        e.preventDefault();
+        e.preventDefault()
         nextSlide(project)
       }
       if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-        e.preventDefault();
+        e.preventDefault()
         prevSlide()
       }
     })
@@ -119,14 +121,19 @@ const ProjectPage = ({
     setSlideNumber(0)
   }, [project])
 
-  console.log(project)
+  if (!project) {
+    return (
+      <div className="flex flex-row w-full justify-center text-white">
+        <h1>404 - Page Not Found</h1>
+      </div>
+    )
+  }
 
   const currentSlide = project.slides[slideNumber]
 
   const slides = project.slides.map((slide: ISlide, index: number) => (
     <Slide slide={slide} key={index} nextSlide={() => nextSlide(project)} />
   ))
-
 
   let bottom =
     slideNumber == 0 ? (
