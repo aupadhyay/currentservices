@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 export default function Layout({
-  color = "none",
+  color = "None",
   top = "Current Services",
   bottom,
   children,
@@ -10,7 +10,7 @@ export default function Layout({
   top?: React.ReactNode;
   background?: string;
   bottom?: React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <div
