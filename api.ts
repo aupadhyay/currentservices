@@ -9,7 +9,7 @@ export type ISlide = {
     id: string;
     url: string;
   };
-  text_color?: string;
+  textColor?: string;
 };
 
 export type IProject = {

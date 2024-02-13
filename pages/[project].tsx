@@ -5,12 +5,11 @@ import {
   getProjectByName,
   getProjects,
 } from "@/api"
-import Index from "@/components/Index"
-import Layout from "@/components/Layout"
+import { Header, Index, default as Layout } from "@/components/Layout"
 import clsx from "clsx"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects: IProject[] = await getProjects()
@@ -29,25 +28,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return { props: { project, projects } }
 }
 
-const Header = ({ color = "white" }: { color?: string }) => {
-  return (
-    <div className="flex justify-between w-full">
-      <div>
-        <h1
-          className={clsx('text-xl transition-colors ease-in-out duration-500', `text-${color}`)}
-        >
-          <Link href="/about">Current Services</Link>
-        </h1>
-      </div>
-      <div>
-        <h1 className={clsx('text-xl', `text-${color}`)}>
-          <Link href="/">Index</Link>
-        </h1>
-      </div>
-    </div>
-  )
-}
-
 const Slide = ({
   slide,
   nextSlide,
@@ -61,15 +41,19 @@ const Slide = ({
     (slide.cover.data && `${BASE_URL}${slide.cover.data.attributes.url}`) || ""
   return (
     <div
-      className="w-full px-24 py-36 h-screen relative"
+      className="w-full px-24 py-36 h-screen relative snap-start"
       style={
         coverUrl
-          ? { backgroundImage: `url(${coverUrl})`, backgroundSize: "cover" }
+          ? { backgroundImage: `url(${coverUrl})`, backgroundSize: "cover", backgroundPosition: "center"}
           : { backgroundColor: bgColor }
       }
       onClick={() => nextSlide()}
     >
-      <p className={`text-${slide.text_color || "white"} text-2xl w-3/4`}>
+      <p
+        className={`text-${
+          slide.textColor || "white"
+        } w-3/4 font-favorit font-book text-[32px]`}
+      >
         {slide.description}
       </p>
     </div>
@@ -84,9 +68,11 @@ const ProjectPage = ({
   projects: IProject[]
 }) => {
   const [slideNumber, setSlideNumber] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   const nextSlide = (currProject: IProject) => {
-    window.scrollBy({
+    if (scrollRef.current === null) return
+    scrollRef.current.scrollBy({
       top: window.innerHeight,
       behavior: "smooth",
     })
@@ -96,7 +82,8 @@ const ProjectPage = ({
   }
 
   const prevSlide = () => {
-    window.scrollBy({
+    if (scrollRef.current === null) return
+    scrollRef.current.scrollBy({
       top: -window.innerHeight,
       behavior: "smooth",
     })
@@ -104,7 +91,18 @@ const ProjectPage = ({
   }
 
   useEffect(() => {
-    window.addEventListener("keydown", (e) => {
+    if (scrollRef.current === null) return
+
+    const handleScroll = () => {
+      if (scrollRef.current === null) return
+      const currentScrollY = scrollRef.current.scrollTop
+      const windowHeight = window.innerHeight
+      const newSlideNumber = Math.round(currentScrollY / windowHeight)
+      setSlideNumber(newSlideNumber)
+    }
+    scrollRef.current.addEventListener("scroll", handleScroll)
+
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
         e.preventDefault()
         nextSlide(project)
@@ -113,8 +111,13 @@ const ProjectPage = ({
         e.preventDefault()
         prevSlide()
       }
-    })
-  }, [])
+    }
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [scrollRef])
 
   useEffect(() => {
     setSlideNumber(0)
@@ -134,23 +137,20 @@ const ProjectPage = ({
     <Slide slide={slide} key={index} nextSlide={() => nextSlide(project)} />
   ))
 
-  let bottom =
-    slideNumber == 0 ? (
-      <Index projects={projects} selected={project.name} />
-    ) : (
-      <></>
-    )
-  if (slideNumber == project.slides.length - 1) {
+  let bottom = <></>
+  if (slideNumber === 0) {
+    bottom = <Index projects={projects} selected={project.name} />
+  } else if (slideNumber === project.slides.length - 1) {
     const projectIndex = projects.findIndex((p) => p.name === project.name)
     const nextProject = projects[(projectIndex + 1) % projects.length]
     const nextProjectName =
       nextProject.name.charAt(0).toUpperCase() + nextProject.name.slice(1)
     bottom = (
-      <div className="flex flex-row justify-between mb-10">
-        <h1 className={`text-xl text-${currentSlide.text_color || "white"}`}>
+      <div className="flex flex-row justify-between transition-colors">
+        <h1 className={clsx('font-favorit font-book text-[32px]', currentSlide.textColor && `text-${currentSlide.textColor}`)}>
           <Link href="/">Index</Link>
         </h1>
-        <h1 className={`text-xl text-${currentSlide.text_color || "white"}`}>
+        <h1 className={clsx('font-favorit font-book text-[32px]', currentSlide.textColor && `text-${currentSlide.textColor}`)}>
           <Link href={`/${nextProject.name}`}>Next - {nextProjectName}</Link>
         </h1>
       </div>
@@ -159,10 +159,9 @@ const ProjectPage = ({
 
   return (
     <Layout
-      top={
-        <Header color={(currentSlide && currentSlide.text_color) || "white"} />
-      }
+      top={<Header color={currentSlide.textColor} showIndex={slideNumber == 0} />}
       bottom={bottom}
+      scrollRef={scrollRef}
     >
       {slides}
     </Layout>

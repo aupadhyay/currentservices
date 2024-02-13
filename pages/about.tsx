@@ -1,5 +1,6 @@
+import clsx from "clsx"
 import Link from "next/link"
-import Layout from "../components/Layout"
+import Layout, { Header } from "../components/Layout"
 
 export default function About() {
   const services = [
@@ -29,14 +30,18 @@ export default function About() {
     <Layout
       color="[#FF242F]"
       top={
-        <h1 className='text-xl text-white'>
-          <Link href="/about">Current Services</Link>
-        </h1>
+        <Header showIndex={false} />
       }
       bottom={
-        <h1 className='text-xl text-white mb-10 font-favorit'>
-          <Link href="/">Index</Link>
-        </h1>
+        <div>
+          <h1
+            className={clsx(
+              "font-favorit font-regular text-[16px] text-white transition-colors ease-in-out duration-500",
+            )}
+          >
+            <Link href="/">Index</Link>
+          </h1>
+        </div>
       }
     >
       <div className="px-36 py-36">
