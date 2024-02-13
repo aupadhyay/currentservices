@@ -1,17 +1,14 @@
+import { IProject, getProjects } from "@/api";
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import router from "next/router";
-import { GetStaticPaths, GetStaticProps } from "next";
-import { getProjects } from "@/api";
 
 export const getStaticProps: GetStaticProps = async () => {
   const projects = await getProjects();
   return { props: { projects } };
 };
 
-export default function Home({ projects }) {
-  console.log("here");
-  console.log("proj gang:", projects);
-
+export default function Home({projects}: { projects : IProject[] }) {
   const handleClick = () => {
     // Handle the click event, such as logging or performing other actions
     console.log("Link clicked!");
@@ -36,13 +33,13 @@ export default function Home({ projects }) {
       <div className="absolute bottom-20" style={{ display: "flex" }}>
         {projects.map((project) => (
           <Link
-            href={`/${project.attributes.name.replace(/\s/g, "")}`}
-            key={project}
+            href={`/${project.name.replace(/\s/g, "")}`}
+            key={project.name}
             className="text-xl text-white hover:underline"
             style={{ marginRight: "50px" }}
           >
-            {project.attributes.name.charAt(0).toUpperCase() +
-              project.attributes.name.slice(1)}
+            {project.name.charAt(0).toUpperCase() +
+              project.name.slice(1)}
           </Link>
         ))}
       </div>
