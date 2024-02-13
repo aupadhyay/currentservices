@@ -22,18 +22,32 @@ function Splash({ className }: { className?: string }) {
 }
 
 export default function Home({ projects }: { projects: IProject[] }) {
-  const [showSplash, setShowSplash] = useState(false)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(true)
-    }, 1000)
+  const [firstLoad, setFirstLoad] = useState(false)
+  const [clearSplash, setClearSplash] = useState(false)
 
-    return () => clearTimeout(timer)
+  useEffect(() => {
+    if (window && window.sessionStorage && window.sessionStorage.getItem('firstLoad') == null) {
+      setFirstLoad(true)
+      const timer = setTimeout(() => {
+        setClearSplash(true)
+        window.sessionStorage.setItem('firstLoad', 'false')
+      }, 1000)
+
+      return () => clearTimeout(timer)
+    }
   }, [])
 
   return (
     <div>
-      <Splash className={showSplash ? 'ease-in-out opacity-0 transition-opacity duration-1000' : ''}/>
+      {firstLoad && (
+        <Splash
+          className={
+            clearSplash
+              ? "ease-in-out opacity-0 transition-opacity duration-1000"
+              : ""
+          }
+        />
+      )}
       <ProjectPage project={projects[0]} projects={projects} />
     </div>
   )
