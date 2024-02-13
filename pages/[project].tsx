@@ -7,6 +7,7 @@ import {
 } from "@/api"
 import Index from "@/components/Index"
 import Layout from "@/components/Layout"
+import clsx from "clsx"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -17,8 +18,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { project: project.name },
   }))
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
   return { paths, fallback: "blocking" }
 }
 
@@ -35,13 +34,13 @@ const Header = ({ color = "white" }: { color?: string }) => {
     <div className="flex justify-between w-full">
       <div>
         <h1
-          className={`text-xl text-${color} transition-colors ease-in-out duration-500`}
+          className={clsx('text-xl transition-colors ease-in-out duration-500', `text-${color}`)}
         >
           <Link href="/about">Current Services</Link>
         </h1>
       </div>
       <div>
-        <h1 className={`text-xl text-${color}`}>
+        <h1 className={clsx('text-xl', `text-${color}`)}>
           <Link href="/">Index</Link>
         </h1>
       </div>
