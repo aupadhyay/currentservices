@@ -14,6 +14,16 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    fontFamily: {
+      favorit: ['"CS Favorit"']
+    },
+    fontWeight: {
+      light: '200',
+      regular: '300',
+      medium: '400',
+      book: '600',
+      bold: '700',
+    },
   },
   plugins: [],
 };

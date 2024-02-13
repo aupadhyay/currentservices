@@ -34,7 +34,7 @@ export default function About() {
         </h1>
       }
       bottom={
-        <h1 className='text-xl text-white mb-10'>
+        <h1 className='text-xl text-white mb-10 font-favorit'>
           <Link href="/">Index</Link>
         </h1>
       }

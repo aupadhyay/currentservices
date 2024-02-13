@@ -31,3 +31,92 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-Bold.woff2") format("woff2"),
+    url("./fonts/CSFavorit-Bold.woff") format("woff")
+      url("./fonts/CSFavorit-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-BoldItalic.woff2") format("woff2"),
+    url("./fonts/CSFavorit-BoldItalic.woff") format("woff")
+      url("./fonts/CSFavorit-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-Book.woff2") format("woff2"),
+    url("./fonts/CSFavorit-Book.woff") format("woff")
+      url("./fonts/CSFavorit-Book.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-BookItalic.woff2") format("woff2"),
+    url("./fonts/CSFavorit-BookItalic.woff") format("woff")
+      url("./fonts/CSFavorit-BookItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-Light.woff2") format("woff2"),
+    url("./fonts/CSFavorit-Light.woff") format("woff")
+      url("./fonts/CSFavorit-Light.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-LightItalic.woff2") format("woff2"),
+    url("./fonts/CSFavorit-LightItalic.woff") format("woff")
+      url("./fonts/CSFavorit-LightItalic.otf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-Medium.woff2") format("woff2"),
+    url("./fonts/CSFavorit-Medium.woff") format("woff")
+      url("./fonts/CSFavorit-Medium.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-MediumItalic.woff2") format("woff2"),
+    url("./fonts/CSFavorit-MediumItalic.woff") format("woff")
+      url("./fonts/CSFavorit-MediumItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-Regular.woff2") format("woff2"),
+    url("./fonts/CSFavorit-Regular.woff") format("woff")
+      url("./fonts/CSFavorit-Regular.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "CS Favorit";
+  src: url("./fonts/CSFavorit-RegularItalic.woff2") format("woff2"),
+    url("./fonts/CSFavorit-RegularItalic.woff") format("woff")
+      url("./fonts/CSFavorit-RegularItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
