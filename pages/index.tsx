@@ -1,9 +1,12 @@
 import { IProject, getProjects } from "@/api"
-import Layout from "@/components/Layout"
 import clsx from "clsx"
 import { GetStaticProps } from "next"
 import { useEffect, useState } from "react"
 import ProjectPage from "./[project]"
+
+// TODO: consider making these configurable in Strapi, along with splash screen bg
+const SPLASH_DURATION = 1000
+const SPLASH_FADE_DURATION = 1000
 
 export const getStaticProps: GetStaticProps = async () => {
   const projects = await getProjects()
@@ -12,11 +15,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
 function Splash({ className }: { className?: string }) {
   return (
-    <Layout color="[#FF242F]" className={clsx(className, "z-[100]")}>
-      <div className="py-80 text-center text-white">
+    <div className={clsx("z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-screen flex justify-center items-center", className)}>
+      <div className="text-center text-white">
         &copy; 2024 Current Services &amp; All Parties Mentioned Herein
       </div>
-    </Layout>
+    </div>
   )
 }
 
@@ -34,7 +37,10 @@ export default function Home({ projects }: { projects: IProject[] }) {
       const timer = setTimeout(() => {
         setClearSplash(true)
         window.sessionStorage.setItem("firstLoad", "false")
-      }, 1000)
+        setTimeout(() => {
+          setFirstLoad(false)
+        }, SPLASH_FADE_DURATION)
+      }, SPLASH_DURATION)
 
       return () => clearTimeout(timer)
     }
@@ -46,7 +52,7 @@ export default function Home({ projects }: { projects: IProject[] }) {
         <Splash
           className={
             clearSplash
-              ? "ease-in-out opacity-0 transition-opacity duration-1000"
+              ? `ease-in-out opacity-0 transition-opacity duration-[${SPLASH_FADE_DURATION}ms]`
               : ""
           }
         />
