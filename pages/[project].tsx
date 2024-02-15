@@ -30,11 +30,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Slide = ({
   slide,
+  prevSlide,
   nextSlide,
   bgColor = "white",
 }: {
-  slide: any
-  nextSlide: Function
+  slide: any,
+  prevSlide: Function,
+  nextSlide: Function,
   bgColor?: string
 }) => {
   const coverUrl =
@@ -47,7 +49,15 @@ const Slide = ({
           ? { backgroundImage: `url(${coverUrl})`, backgroundSize: "cover", backgroundPosition: "center"}
           : { backgroundColor: bgColor }
       }
-      onClick={() => nextSlide()}
+      onClick={(e) => {
+        const clickPosition = e.clientY;
+        const halfScreenHeight = window.innerHeight / 2;
+        if (clickPosition <= halfScreenHeight) {
+          prevSlide();
+        } else {
+          nextSlide();
+        }
+      }}
     >
       <p
         className={`text-${
@@ -134,7 +144,7 @@ const ProjectPage = ({
   const currentSlide = project.slides[slideNumber]
 
   const slides = project.slides.map((slide: ISlide, index: number) => (
-    <Slide slide={slide} key={index} nextSlide={() => nextSlide(project)} />
+    <Slide slide={slide} key={index} prevSlide={prevSlide} nextSlide={() => nextSlide(project)} />
   ))
 
   let bottom = <></>
