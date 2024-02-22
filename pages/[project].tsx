@@ -41,11 +41,14 @@ const Slide = ({
 }) => {
   const coverUrl =
     (slide.cover.data && `${BASE_URL}${slide.cover.data.attributes.url}`) || ""
+
+  const isVideo = coverUrl.endsWith(".mp4")
+
   return (
     <div
       className="w-full px-24 py-36 h-screen relative snap-start"
       style={
-        coverUrl
+        coverUrl && !isVideo
           ? { backgroundImage: `url(${coverUrl})`, backgroundSize: "cover", backgroundPosition: "center"}
           : { backgroundColor: bgColor }
       }
@@ -59,6 +62,11 @@ const Slide = ({
         }
       }}
     >
+      {isVideo && (
+       <div className="absolute top-0 left-0 w-full h-full">
+         <video autoPlay muted loop className="w-full h-full object-cover" src={coverUrl} />
+       </div> 
+      )}
       <p
         className={`text-${
           slide.textColor || "white"
