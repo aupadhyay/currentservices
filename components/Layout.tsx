@@ -59,7 +59,8 @@ export const Index = ({
             selected === project.name && "border-b"
           )}
         >
-          {project.name.charAt(0).toUpperCase() + project.name.slice(1)}
+          {/* {project.name.replace(/\b\w/g, char => char.toUpperCase())} */}
+          {project.displayName}
         </Link>
       ))}
     </div>
