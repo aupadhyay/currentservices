@@ -15,7 +15,8 @@ export type ISlide = {
 export type IProject = {
   id: string;
   name: string;
-  description: string;
+  description: string,
+  displayName: string,
   slides: ISlide[];
 };
 
