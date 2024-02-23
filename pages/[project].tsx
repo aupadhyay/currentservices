@@ -42,7 +42,7 @@ const Slide = ({
   const coverUrl =
     (slide.cover.data && `${BASE_URL}${slide.cover.data.attributes.url}`) || ""
 
-  const isVideo = coverUrl.endsWith(".mp4")
+  const isVideo = coverUrl.endsWith(".mp4") || coverUrl.endsWith(".mov")
 
   return (
     <div
