@@ -15,7 +15,7 @@ const config: Config = {
       },
     },
     fontFamily: {
-      favorit: ['"CS Favorit"']
+      favorit: ['"CS Favorit"'], 
     },
     fontWeight: {
       light: '200',
@@ -24,6 +24,10 @@ const config: Config = {
       book: '600',
       bold: '700',
     },
+    fontSize: {
+      '2xl': '1.5rem',
+      '3xl': '1.8rem',
+    }
   },
   plugins: [],
 };
