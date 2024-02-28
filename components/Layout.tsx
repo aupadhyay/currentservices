@@ -5,9 +5,11 @@ import Link from "next/link"
 export function Header({
   color = "white",
   showIndex = true,
+  showColophon = false,
 }: {
   color?: string
   showIndex?: boolean
+  showColophon?: boolean
 }) {
   if (!color) {
     color = "white"
@@ -37,6 +39,18 @@ export function Header({
           </h1>
         </div>
       )}
+         {showColophon && (
+        <div>
+          <h1
+            className={clsx(
+              "font-favorit font-regular text-[16px] transition-colors ease-in-out duration-500",
+              `text-${color}`
+            )}
+          >
+            <Link href="/colophon">Colophon</Link>
+          </h1>
+        </div>
+      )}
     </div>
   )
 }
@@ -44,19 +58,22 @@ export function Header({
 export const Index = ({
   projects,
   selected,
+  color = "white",
 }: {
   projects: IProject[]
   selected?: string
+  color?: string
 }) => {
   return (
-    <div className="font-favorit font-book text-[32px] flex flex-row gap-10 transition-colors ease-in-out duration-500">
+    <div className={clsx("font-favorit font-book text-[32px] flex flex-row gap-5 transition-colors ease-in-out duration-500", `text-${color}`)}
+    >
       {projects.map((project) => (
         <Link
           href={`/${project.name.replace(/\s/g, "")}`}
           key={project.name}
           className={clsx(
-            "text-xl text-white hover:border-b transition-colors ease-in-out duration-500",
-            selected === project.name && "border-b"
+            "text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500",
+            `text-${color}`, selected === project.name && "border-b-2 border-current"
           )}
         >
           {/* {project.name.replace(/\b\w/g, char => char.toUpperCase())} */}

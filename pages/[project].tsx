@@ -157,7 +157,7 @@ const ProjectPage = ({
 
   let bottom = <></>
   if (slideNumber === 0) {
-    bottom = <Index projects={projects} selected={project.name} />
+    bottom = <Index projects={projects} selected={project.name} color={currentSlide.textColor} />
   } else if (slideNumber === project.slides.length - 1) {
     const projectIndex = projects.findIndex((p) => p.name === project.name)
     const nextProject = projects[(projectIndex + 1) % projects.length]
@@ -177,7 +177,7 @@ const ProjectPage = ({
 
   return (
     <Layout
-      top={<Header color={currentSlide.textColor} showIndex={slideNumber == 0} />}
+      top={<Header color={currentSlide.textColor} showIndex={slideNumber != project.slides.length - 1} />}
       bottom={bottom}
       scrollRef={scrollRef}
     >

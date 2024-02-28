@@ -5,8 +5,8 @@ import { useEffect, useState } from "react"
 import ProjectPage from "./[project]"
 
 // TODO: consider making these configurable in Strapi, along with splash screen bg
-const SPLASH_DURATION = 1000
-const SPLASH_FADE_DURATION = 1000
+const SPLASH_DURATION = 2100
+const SPLASH_FADE_DURATION = 600
 
 export const getStaticProps: GetStaticProps = async () => {
   const projects = await getProjects()
