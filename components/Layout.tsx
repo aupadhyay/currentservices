@@ -39,7 +39,7 @@ export function Header({
           </h1>
         </div>
       )}
-         {showColophon && (
+      {showColophon && (
         <div>
           <h1
             className={clsx(
@@ -65,18 +65,22 @@ export const Index = ({
   color?: string
 }) => {
   return (
-    <div className={clsx("font-favorit font-book text-[32px] flex flex-row gap-5 transition-colors ease-in-out duration-500", `text-${color}`)}
+    <div
+      className={clsx(
+        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse gap-5 transition-colors ease-in-out duration-500",
+        `text-${color}`
+      )}
     >
       {projects.map((project) => (
         <Link
           href={`/${project.name.replace(/\s/g, "")}`}
           key={project.name}
           className={clsx(
-            "text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500",
-            `text-${color}`, selected === project.name && "border-b-2 border-current"
+            "text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500 w-fit",
+            `text-${color}`,
+            selected === project.name && "border-b-2 border-current"
           )}
         >
-          {/* {project.name.replace(/\b\w/g, char => char.toUpperCase())} */}
           {project.displayName}
         </Link>
       ))}
@@ -102,7 +106,9 @@ export default function Layout({
 }) {
   return (
     <div className={clsx("w-full h-screen relative", `bg-${color}`, className)}>
-      <div className="fixed top-20 z-20 w-full px-20">{top}</div>
+      <div className="fixed z-20 w-full sm:px-20 px-10 sm:top-20 top-10">
+        {top}
+      </div>
       <div
         className="w-full h-full snap-y snap-mandatory overflow-y-scroll"
         ref={scrollRef}
@@ -110,7 +116,9 @@ export default function Layout({
         {children}
       </div>
 
-      <div className="fixed bottom-20 z-20 w-full px-20">{bottom}</div>
+      <div className="fixed sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10">
+        {bottom}
+      </div>
     </div>
   )
 }

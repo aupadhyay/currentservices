@@ -64,13 +64,13 @@ const Slide = ({
     >
       {isVideo && (
        <div className="absolute top-0 left-0 w-full h-full">
-         <video autoPlay muted loop className="w-full h-full object-cover" src={coverUrl} />
+         <video autoPlay muted loop className="w-full h-full sm:object-cover" src={coverUrl} />
        </div> 
       )}
       <p
         className={`text-${
           slide.textColor || "white"
-        } w-3/4 font-favorit font-book text-[32px]`}
+        } sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
       >
         {slide.description}
       </p>
