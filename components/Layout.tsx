@@ -24,8 +24,9 @@ export function Header({
             `text-${color}`
           )}
         >
-          <Link href="/about">Current Services</Link>
+          <Link href="/about" className="tracking-[-0.01em]">Current Services</Link>
         </h1>
+
       </div>
       {showIndex && (
         <div>

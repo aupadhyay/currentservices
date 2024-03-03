@@ -48,6 +48,8 @@ export default function Home({ projects }: { projects: IProject[] }) {
 
   return (
     <div>
+          <link rel="icon" type="image/svg" href="./favicon.svg"/>
+
       {firstLoad && (
         <Splash
           className={
