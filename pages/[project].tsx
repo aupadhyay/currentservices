@@ -169,7 +169,7 @@ const ProjectPage = ({
           <Link href="/">Index</Link>
         </h1>
         <h1 className={clsx('font-favorit font-book text-[32px]', currentSlide.textColor && `text-${currentSlide.textColor}`)}>
-          <Link href={`/${nextProject.name}`}>Next - {nextProjectName}</Link>
+          <Link href={`/${nextProject.name}`} onClick={() => setSlideNumber(1)}> Next - {nextProjectName}</Link>
         </h1>
       </div>
     )
