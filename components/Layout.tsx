@@ -1,6 +1,7 @@
-import { IProject } from "@/api"
+import { IProject, ISlide, BASE_URL } from "@/api"
 import clsx from "clsx"
 import Link from "next/link"
+import { useState } from "react"
 
 export function Header({
   color = "white",
@@ -60,11 +61,16 @@ export const Index = ({
   projects,
   selected,
   color = "white",
+  hoveredProject,
+  setHoveredProject,
 }: {
-  projects: IProject[]
-  selected?: string
-  color?: string
+  projects: IProject[],
+  selected?: string,
+  color?: string,
+  hoveredProject?: ISlide
+  setHoveredProject?: Function
 }) => {
+
   return (
     <div
       className={clsx(
@@ -76,9 +82,14 @@ export const Index = ({
         <Link
           href={`/${project.name.replace(/\s/g, "")}`}
           key={project.name}
+          onMouseEnter={() => {
+            console.log("Hovered Project ID:", hoveredProject);
+            setHoveredProject(project.slides[0]);
+          }}
+          onMouseLeave={() => setHoveredProject(projects[0].slides[0])}
           className={clsx(
             "text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500 w-fit",
-            `text-${color}`,
+            `text-${color}`, 
             selected === project.name && "border-b-2 border-current"
           )}
         >
@@ -86,8 +97,9 @@ export const Index = ({
         </Link>
       ))}
     </div>
-  )
-}
+  );
+};
+
 
 export default function Layout({
   color = "None",
@@ -96,6 +108,7 @@ export default function Layout({
   bottom,
   children,
   scrollRef,
+  hoveredProj,
 }: {
   color?: string
   top?: React.ReactNode
@@ -104,6 +117,7 @@ export default function Layout({
   bottom?: React.ReactNode
   children?: React.ReactNode
   scrollRef?: React.RefObject<HTMLDivElement>
+  hoveredProj?: IProject
 }) {
   return (
     <div className={clsx("w-full h-screen relative", `bg-${color}`, className)}>

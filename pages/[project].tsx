@@ -141,6 +141,7 @@ const ProjectPage = ({
     setSlideNumber(0)
   }, [project])
 
+
   if (!project) {
     return (
       <div className="flex flex-row w-full justify-center text-white">
@@ -154,11 +155,13 @@ const ProjectPage = ({
   const slides = project.slides.map((slide: ISlide, index: number) => (
     <Slide slide={slide} key={index} prevSlide={prevSlide} nextSlide={() => nextSlide(project)} />
   ))
+  const [hoveredProject, setHoveredProject] = useState(projects[0].slides[0]);
 
   let bottom = <></>
   if (slideNumber === 0) {
-    bottom = <Index projects={projects} selected={project.name} color={currentSlide.textColor} />
-  } else if (slideNumber === project.slides.length - 1) {
+    bottom = <Index projects={projects} selected={project.name} color={hoveredProject.textColor} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject}/>
+  } else 
+if (slideNumber === project.slides.length - 1) {
     const projectIndex = projects.findIndex((p) => p.name === project.name)
     const nextProject = projects[(projectIndex + 1) % projects.length]
     const nextProjectName =
@@ -177,11 +180,14 @@ const ProjectPage = ({
 
   return (
     <Layout
-      top={<Header color={currentSlide.textColor} showIndex={slideNumber != project.slides.length - 1} />}
+      top={<Header color={hoveredProject.textColor} showIndex={slideNumber != project.slides.length - 1} />}
       bottom={bottom}
       scrollRef={scrollRef}
+      hoveredProj={hoveredProject}
     >
-      {slides}
+      {<div>
+         <video autoPlay muted loop className="w-full h-full sm:object-cover" src={BASE_URL+hoveredProject.cover.data.attributes.url} />
+       </div>}
     </Layout>
   )
 }
