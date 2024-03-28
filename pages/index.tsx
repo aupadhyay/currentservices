@@ -1,21 +1,27 @@
-import { IProject, getProjects } from "@/api"
+import { BASE_URL, IProject, getProjects } from "@/api"
+import Layout, { Header } from "@/components/Layout"
 import clsx from "clsx"
 import { GetStaticProps } from "next"
+import Link from "next/link"
 import { useEffect, useState } from "react"
-import ProjectPage from "./[project]"
 
-// TODO: consider making these configurable in Strapi, along with splash screen bg
+// TODO: consider making these configurable in Strapi, along with splash screen bg + text. lots of strapi customizability basically
 const SPLASH_DURATION = 2100
 const SPLASH_FADE_DURATION = 600
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getProjects()
+  const projects = await getProjects({ includeSlides: false })
   return { props: { projects } }
 }
 
 function Splash({ className }: { className?: string }) {
   return (
-    <div className={clsx("z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-screen flex justify-center items-center", className)}>
+    <div
+      className={clsx(
+        "z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-screen flex justify-center items-center",
+        className
+      )}
+    >
       <div className="text-center text-white">
         &copy; 2024 Current Services &amp; All Parties Mentioned Herein
       </div>
@@ -57,7 +63,61 @@ export default function Home({ projects }: { projects: IProject[] }) {
           }
         />
       )}
-      <ProjectPage project={projects[0]} projects={projects} />
+
+      <Index projects={projects} />
     </div>
+  )
+}
+
+export const Index = ({ projects }: { projects: IProject[] }) => {
+  const [selected, setSelected] = useState<IProject>(projects[0])
+  const textColor = selected.indexTextColor
+
+  const indexTabs = (
+    <div
+      className={clsx(
+        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse gap-5 transition-colors ease-in-out duration-500",
+        `text-${textColor}`
+      )}
+    >
+      {projects.map((project) => (
+        <Link
+          href={`/${project.slug}`}
+          key={project.slug}
+          onMouseEnter={() => {
+            setSelected(project)
+          }}
+          onMouseLeave={() => setSelected(projects[0])}
+          className={clsx(
+            "text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500 w-fit",
+            `text-${textColor}`,
+            selected.slug === project.slug && "border-b-2 border-current"
+          )}
+        >
+          {project.title}
+        </Link>
+      ))}
+    </div>
+  )
+
+  const header = (selected: IProject) => (
+    <Header color={selected.indexTextColor} showIndex={true} />
+  )
+
+  return (
+    <Layout top={header(selected)} bottom={indexTabs} cursor='angled'>
+      <div className="w-full h-full relative overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full max-w-none"
+          style={{
+            transform: "translate(-50%, -50%)",
+          }}
+          src={BASE_URL + selected.hoverVideo.data.attributes.url}
+        />
+      </div>
+    </Layout>
   )
 }

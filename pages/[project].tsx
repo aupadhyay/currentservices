@@ -2,10 +2,10 @@ import {
   BASE_URL,
   IProject,
   ISlide,
-  getProjectByName,
+  getProjectBySlug,
   getProjects,
 } from "@/api"
-import { Header, Index, default as Layout } from "@/components/Layout"
+import { Header, default as Layout } from "@/components/Layout"
 import clsx from "clsx"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
@@ -13,15 +13,17 @@ import { useEffect, useRef, useState } from "react"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects: IProject[] = await getProjects()
-  const paths = projects.map((project) => ({
-    params: { project: project.name },
-  }))
+  const paths = projects
+    .filter((project) => project.slug)
+    .map((project) => ({
+      params: { project: project.slug },
+    }))
 
   return { paths, fallback: "blocking" }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const project = (await getProjectByName(
+  const project = (await getProjectBySlug(
     params!.project as string
   )) as IProject
   const projects = await getProjects()
@@ -32,48 +34,63 @@ const Slide = ({
   slide,
   prevSlide,
   nextSlide,
-  bgColor = "white",
 }: {
-  slide: any,
-  prevSlide: Function,
-  nextSlide: Function,
-  bgColor?: string
+  slide: any
+  prevSlide: Function
+  nextSlide: Function
 }) => {
-  const coverUrl =
-    (slide.cover.data && `${BASE_URL}${slide.cover.data.attributes.url}`) || ""
-
-  const isVideo = coverUrl.endsWith(".mp4") || coverUrl.endsWith(".mov")
+  // TODO: make add this to strapi instead
+  const Media = ({ url }: { url: string }) => {
+    if (url.endsWith(".mp4") || url.endsWith(".mov")) {
+      return (
+        <video
+          autoPlay
+          muted
+          loop
+          className="w-full h-full sm:object-cover"
+          src={url}
+        />
+      )
+    } else {
+      return <img className="w-full h-full sm:object-cover" src={url} />
+    }
+  }
 
   return (
     <div
-      className="w-full px-24 py-36 h-screen relative snap-start"
+      className="w-full h-screen relative snap-start"
       style={
-        coverUrl && !isVideo
-          ? { backgroundImage: `url(${coverUrl})`, backgroundSize: "cover", backgroundPosition: "center"}
-          : { backgroundColor: bgColor }
+        slide.bgMaskColor
+          ? { backgroundColor: slide.bgMaskColor, opacity: slide.bgMaskOpacity }
+          : { backgroundColor: "white" }
       }
       onClick={(e) => {
-        const clickPosition = e.clientY;
-        const halfScreenHeight = window.innerHeight / 2;
+        const clickPosition = e.clientY
+        const halfScreenHeight = window.innerHeight / 2
         if (clickPosition <= halfScreenHeight) {
-          prevSlide();
+          prevSlide()
         } else {
-          nextSlide();
+          nextSlide()
         }
       }}
     >
-      {isVideo && (
-       <div className="absolute top-0 left-0 w-full h-full">
-         <video autoPlay muted loop className="w-full h-full sm:object-cover" src={coverUrl} />
-       </div> 
-      )}
-      <p
-        className={`text-${
-          slide.textColor || "white"
-        } sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
-      >
-        {slide.description}
-      </p>
+      <div className="hidden sm:block absolute top-0 left-0 w-full h-full">
+        {slide.desktopBg?.data?.attributes?.url && (
+          <Media url={BASE_URL + slide.desktopBg.data.attributes.url} />
+        )}
+      </div>
+      <div className="block sm:hidden absolute top-0 left-0 w-full h-full">
+        {slide.mobileBg?.data?.attributes?.url && (
+          <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
+        )}
+      </div>
+      <div className="px-24 py-36">
+        <p
+          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
+        >
+          {slide.description}
+        </p>
+      </div>
     </div>
   )
 }
@@ -141,7 +158,6 @@ const ProjectPage = ({
     setSlideNumber(0)
   }, [project])
 
-
   if (!project) {
     return (
       <div className="flex flex-row w-full justify-center text-white">
@@ -153,26 +169,40 @@ const ProjectPage = ({
   const currentSlide = project.slides[slideNumber]
 
   const slides = project.slides.map((slide: ISlide, index: number) => (
-    <Slide slide={slide} key={index} prevSlide={prevSlide} nextSlide={() => nextSlide(project)} />
+    <Slide
+      slide={slide}
+      key={index}
+      prevSlide={prevSlide}
+      nextSlide={() => nextSlide(project)}
+    />
   ))
-  const [hoveredProject, setHoveredProject] = useState(projects[0].slides[0]);
 
   let bottom = <></>
-  if (slideNumber === 0) {
-    bottom = <Index projects={projects} selected={project.name} color={hoveredProject.textColor} hoveredProject={hoveredProject} setHoveredProject={setHoveredProject}/>
-  } else 
-if (slideNumber === project.slides.length - 1) {
-    const projectIndex = projects.findIndex((p) => p.name === project.name)
+  if (slideNumber === project.slides.length - 1) {
+    const projectIndex = projects.findIndex((p) => p.slug === project.slug)
     const nextProject = projects[(projectIndex + 1) % projects.length]
     const nextProjectName =
-      nextProject.name.charAt(0).toUpperCase() + nextProject.name.slice(1)
+      nextProject.slug.charAt(0).toUpperCase() + nextProject.slug.slice(1)
     bottom = (
       <div className="flex flex-row justify-between transition-colors">
-        <h1 className={clsx('font-favorit font-book text-[32px]', currentSlide.textColor && `text-${currentSlide.textColor}`)}>
+        <h1
+          className={clsx(
+            "font-favorit font-book text-[32px]",
+            currentSlide.textColor && `text-${currentSlide.textColor}`
+          )}
+        >
           <Link href="/">Index</Link>
         </h1>
-        <h1 className={clsx('font-favorit font-book text-[32px]', currentSlide.textColor && `text-${currentSlide.textColor}`)}>
-          <Link href={`/${nextProject.name}`} onClick={() => setSlideNumber(1)}> Next - {nextProjectName}</Link>
+        <h1
+          className={clsx(
+            "font-favorit font-book text-[32px]",
+            currentSlide.textColor && `text-${currentSlide.textColor}`
+          )}
+        >
+          <Link href={`/${nextProject.slug}`} onClick={() => setSlideNumber(1)}>
+            {" "}
+            Next - {nextProjectName}
+          </Link>
         </h1>
       </div>
     )
@@ -180,14 +210,18 @@ if (slideNumber === project.slides.length - 1) {
 
   return (
     <Layout
-      top={<Header color={hoveredProject.textColor} showIndex={slideNumber != project.slides.length - 1} />}
+      top={
+        <Header
+          color={currentSlide.textColor}
+          showIndex={slideNumber != project.slides.length - 1}
+        />
+      }
       bottom={bottom}
       scrollRef={scrollRef}
-      hoveredProj={hoveredProject}
+      cursor={currentSlide.cursor}
+      textColor={currentSlide.textColor}
     >
-      {<div>
-         <video autoPlay muted loop className="w-full h-full sm:object-cover" src={BASE_URL+hoveredProject.cover.data.attributes.url} />
-       </div>}
+      {slides}
     </Layout>
   )
 }
