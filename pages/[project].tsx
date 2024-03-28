@@ -196,8 +196,7 @@ const ProjectPage = ({
   if (slideNumber === project.slides.length - 1) {
     const projectIndex = projects.findIndex((p) => p.slug === project.slug)
     const nextProject = projects[(projectIndex + 1) % projects.length]
-    const nextProjectName =
-      nextProject.slug.charAt(0).toUpperCase() + nextProject.slug.slice(1)
+    const nextProjectName = nextProject.title
     bottom = (
       <div className="flex flex-row justify-between transition-colors">
         <h1
@@ -215,7 +214,6 @@ const ProjectPage = ({
           )}
         >
           <Link href={`/${nextProject.slug}`} onClick={() => setSlideNumber(1)}>
-            {" "}
             Next - {nextProjectName}
           </Link>
         </h1>
