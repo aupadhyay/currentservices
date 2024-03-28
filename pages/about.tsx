@@ -38,6 +38,7 @@ export default function About() {
       top={
         <Header showIndex={false} showColophon={true} />
       }
+      cursor='angled'
       bottom={
         <div>
           <h1
