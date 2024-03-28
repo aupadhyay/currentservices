@@ -99,7 +99,6 @@ export default function Layout({
   scrollRef?: React.RefObject<HTMLDivElement>
 }) {
   const mouseRef = useRef<HTMLDivElement>(null)
-  console.log("got text color: ", textColor)
   const [mouseY, setMouseY] = useState<number>(0)
   const [cursorUrl, setCursorUrl] = useState<string>(getCursor(cursor, "down", textColor))
 
@@ -120,7 +119,7 @@ export default function Layout({
 
   return (
     <div
-      className={clsx("w-full h-screen relative", `bg-${color}`, className)}
+      className={clsx("w-full h-screen relative", color && `bg-${color}`, className)}
       style={{
         cursor: `${cursorUrl}, auto`,
       }}

@@ -35,7 +35,7 @@ const Slide = ({
   prevSlide,
   nextSlide,
 }: {
-  slide: any
+  slide: ISlide
   prevSlide: Function
   nextSlide: Function
 }) => {
@@ -59,11 +59,6 @@ const Slide = ({
   return (
     <div
       className="w-full h-screen relative snap-start"
-      style={
-        slide.bgMaskColor
-          ? { backgroundColor: slide.bgMaskColor, opacity: slide.bgMaskOpacity }
-          : { backgroundColor: "white" }
-      }
       onClick={(e) => {
         const clickPosition = e.clientY
         const halfScreenHeight = window.innerHeight / 2
@@ -74,12 +69,19 @@ const Slide = ({
         }
       }}
     >
-      <div className="hidden sm:block absolute top-0 left-0 w-full h-full">
+      <div
+        className="z-[-1] absolute top-0 left-0 w-full h-full"
+        style={{
+          backgroundColor: slide.bgMaskColor,
+          opacity: slide.bgMaskOpacity,
+        }}
+      ></div>
+      <div className="z-[-2] hidden sm:block absolute top-0 left-0 w-full h-full">
         {slide.desktopBg?.data?.attributes?.url && (
           <Media url={BASE_URL + slide.desktopBg.data.attributes.url} />
         )}
       </div>
-      <div className="block sm:hidden absolute top-0 left-0 w-full h-full">
+      <div className="z-[-2] block sm:hidden absolute top-0 left-0 w-full h-full">
         {slide.mobileBg?.data?.attributes?.url && (
           <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
         )}
@@ -90,6 +92,19 @@ const Slide = ({
         >
           {slide.description}
         </p>
+
+        {slide.services && (
+          <div className="grid grid-flow-col auto-cols-min grid-rows-4 gap-4 w-full gap-y-0">
+            {slide.services.map((service, index) => (
+              <p
+                key={index}
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[24px] text-[18px] leading-[135%] tracking-[-0.21px]`}
+              >
+                {service}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
