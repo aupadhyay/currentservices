@@ -27,7 +27,13 @@ const config: Config = {
     fontSize: {
       '2xl': '1.5rem',
       '3xl': '1.8rem',
-    }
+    },
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px', 
+      'xl': '2580px',     
+    },
   },
   plugins: [],
 };

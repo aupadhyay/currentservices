@@ -76,13 +76,20 @@ const Slide = ({
           opacity: slide.bgMaskOpacity,
         }}
       ></div>
-      <div className="z-[-2] hidden sm:block absolute top-0 left-0 w-full h-full">
+      <div className="z-[-2] hidden sm:block xl:hidden absolute top-0 left-0 w-full h-full">
         {slide.desktopBg?.data?.attributes?.url && (
           <Media url={BASE_URL + slide.desktopBg.data.attributes.url} />
         )}
       </div>
-      <div className="z-[-2] block sm:hidden absolute top-0 left-0 w-full h-full">
+      <div className="z-[-2] block sm:hidden xl:hidden absolute top-0 left-0 w-full h-full">
         {slide.mobileBg?.data?.attributes?.url && (
+          <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
+        )}
+      </div>
+      {/* We will need to make this a larger display from our Strapi */}
+      <div className="z-[-2] hidden sm:hidden xl:block absolute top-0 left-0 w-full h-full">
+        {slide.mobileBg?.data?.attributes?.url && (
+          //Change to slide.largeDisplayBG...
           <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
         )}
       </div>

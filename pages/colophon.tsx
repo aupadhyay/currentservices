@@ -109,7 +109,7 @@ export default function About() {
         </div>
       }
     >
-    <div className="flex justify-center items-center h-full">
+    {/* <div className="flex justify-center items-center h-full ">
       <div className="flex justify-between w-full px-40">
         <div className="flex-1 px-4">
           {firstCol.map((colArray, colIndex) => (
@@ -139,7 +139,42 @@ export default function About() {
           </p>
         </div>
       </div>
+    </div> */}
+
+<div className="flex justify-center items-center py-28 sm:h-full sm:px-40 py-0">
+  <div className="grid grid-cols-1 sm:grid-cols-3">
+    <div className="flex-1 px-4 pb-10 sm:pb-0">
+      {firstCol.map((colArray, colIndex) => (
+        <div className="flex-1 px-10 py-5" key={colIndex}>
+          {colArray.map((item, itemIndex) => (
+            <p className="text-white text-base" key={itemIndex}>
+              {item}
+            </p>
+          ))}
+        </div>
+      ))}
     </div>
+    <div className="flex-1 px-4 pb-10 sm:pb-0">
+      {secondCol.map((colArray, colIndex) => (
+        <div className="flex-1 px-10 py-5" key={colIndex}>
+          {colArray.map((item, itemIndex) => (
+            <p className="text-white text-base" key={itemIndex}>
+              {item || <br />}
+            </p>
+          ))}
+        </div>
+      ))}
+    </div>
+    <div className="flex-1 px-4">
+      <p className="text-white text-base px-10 py-5">
+        {thirdCol}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
     </Layout>
   )
 }

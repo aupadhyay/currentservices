@@ -51,8 +51,8 @@ export default function About() {
         </div>
       }
     >
-      <div className="px-36 py-36">
-        <p className="text-white text-3xl w-3/4">
+      <div className="px-10 sm:px-48 py-32">
+        <p className="hidden sm:block text-white text-3xl w-3/4">
         Current Services is an interdisciplinary design and strategy practice founded in 2020. 
         Operating as a core group that often extends into a broader network, we employ an array 
         of methodologies to support every phase of business building with the goal of bringing 
@@ -65,7 +65,23 @@ export default function About() {
           </a>
             &nbsp;our offices.
         </p>
-        <div className="grid grid-cols-4 mt-20">
+
+        <p className="block sm:hidden text-white text-2xl sm:text-3xl w-3/4">
+        Current Services is an interdisciplinary design and strategy practice founded in 2020. 
+        Operating as a core group that often extends into a broader network, we employ an array 
+        of methodologies to support every phase of business building with the goal of bringing 
+        change-minded ideas to life. <br/><br/>To talk to us about a collaborative project, please{" "}
+          <a
+            className="border-b cursor-pointer text-decoration-none"
+            href="mailto:studio@currentservices.com"
+          >
+            email
+          </a>
+            &nbsp;our offices.
+        </p>
+
+
+        <div className="grid grid-cols-1 sm:grid-cols-4 mt-14">
           {[...Array(numColumns)].map((_, columnIndex) => (
             <div className="col-span-1" key={columnIndex}>
               {serviceTitles
@@ -74,14 +90,14 @@ export default function About() {
                   (columnIndex + 1) * wordsPerTitleList
                 )
                 .map((word, index) => (
-                  <p className="text-white text-2xl mt-1" key={index}>
+                  <p className="text-white text-2xl mt-1 hidden sm:block" key={index}>
                     {word}
                   </p>
                 ))}
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-4 mt-10 ">
+        <div className="grid grid-cols-1 sm:grid-cols-4 mt-6">
           {[...Array(numColumns)].map((_, columnIndex) => (
             <div className="col-span-1" key={columnIndex}>
               {services
@@ -90,13 +106,45 @@ export default function About() {
                   (columnIndex + 1) * wordsPerList
                 )
                 .map((word, index) => (
-                  <p className="text-white text-2xl mt-1" key={index}>
+                  <p className="text-white text-2xl mt-1 hidden sm:block" key={index}>
                     {word}
                   </p>
                 ))}
             </div>
           ))}
         </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-4 mt-16 sm:mt-0">
+          {[...Array(numColumns)].map((_, columnIndex) => (
+            <div className="col-span-1" key={columnIndex}>
+              {serviceTitles
+                .slice(
+                  columnIndex * wordsPerTitleList,
+                  (columnIndex + 1) * wordsPerTitleList
+                )
+                .map((word, index) => (
+                  <p className="text-white text-xl block sm:hidden mt-1 sm:mt-0" key={index}>
+                    {word}
+                  </p>
+                ))}
+              {services
+                .slice(
+                  columnIndex * wordsPerList,
+                  (columnIndex + 1) * wordsPerList
+                )
+                .map((word, index) => (
+                  <p className="text-white text-xl pl-20 block sm:hidden mt-1 sm:mt-0" key={index}>
+                    {word}
+                  </p>
+                ))}
+                <br/>
+            </div>
+          ))}
+        </div>
+       
+
+
+
       </div>
     </Layout>
   )
