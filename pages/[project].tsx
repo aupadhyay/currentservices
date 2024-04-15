@@ -101,15 +101,24 @@ const SlideComponent = ({
         </p>
 
         {slide.services && (
-          <div className="grid grid-flow-col auto-cols-min grid-rows-4 gap-4 w-full gap-y-0">
-            {slide.services.map((service, index) => (
+          <div className="grid grid-cols-3 mt-10">
+            <div className="col-span-1">
               <p
-                key={index}
-                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[24px] text-[18px] leading-[135%] tracking-[-0.21px]`}
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
               >
-                {service}
+                Services rendered
               </p>
-            ))}
+            </div>
+            <div className="col-span-2 grid grid-cols-2">
+              {slide.services.map((service, index) => (
+                <p
+                  key={index}
+                  className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
+                >
+                  {service}
+                </p>
+              ))}
+            </div>
           </div>
         )}
       </div>
