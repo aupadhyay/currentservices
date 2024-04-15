@@ -104,7 +104,7 @@ export default function About() {
               "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500",
             )}
           >
-            <Link href="/">Index</Link>
+            <Link href="/" className="cursor-[inherit]">Index</Link>
           </h1>
         </div>
       }

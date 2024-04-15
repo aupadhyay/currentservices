@@ -212,7 +212,7 @@ const ProjectPage = ({
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
-          <Link href="/">Index</Link>
+          <Link href="/" className="cursor-[inherit]">Index</Link>
         </h1>
         <h1
           className={clsx(
@@ -220,7 +220,7 @@ const ProjectPage = ({
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
-          <Link href={`/${nextProject.slug}`} onClick={() => setSlideNumber(1)}>
+          <Link href={`/${nextProject.slug}`} className="cursor-[inherit]" onClick={() => setSlideNumber(1)}>
             Next - {nextProjectName}
           </Link>
         </h1>

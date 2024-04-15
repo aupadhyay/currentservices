@@ -21,7 +21,7 @@ export function Header({
             `text-${color}`
           )}
         >
-          <Link href="/about" className="tracking-[-0.01em]">
+          <Link href="/about" className="tracking-[-0.01em] cursor-[inherit]">
             Current Services
           </Link>
         </h1>
@@ -34,7 +34,7 @@ export function Header({
               `text-${color}`
             )}
           >
-            <Link href="/">Index</Link>
+            <Link className="cursor-[inherit]" href="/">Index</Link>
           </h1>
         </div>
       )}
@@ -46,7 +46,7 @@ export function Header({
               `text-${color}`
             )}
           >
-            <Link href="/colophon">Colophon</Link>
+            <Link href="/colophon" className="cursor-[inherit]">Colophon</Link>
           </h1>
         </div>
       )}

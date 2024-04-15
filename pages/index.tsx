@@ -89,7 +89,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           }}
           onMouseLeave={() => setSelected(projects[0])}
           className={clsx(
-            "text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500 w-fit",
+            "select-none text-xl hover:border-b-2 border-current transition-colors ease-in-out duration-500 w-fit cursor-[inherit]",
             `text-${textColor}`,
             selected.slug === project.slug && "border-b-2 border-current"
           )}
