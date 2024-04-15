@@ -230,13 +230,14 @@ const ProjectPage = ({
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
-          <Link
-            href={`/${nextProject.slug}`}
+          <span
             className="cursor-[inherit]"
-            onClick={() => setSlideNumber(1)}
+            onClick={() => {
+              window.location.href = `/${nextProject.slug}`
+            }}
           >
             Next - {nextProjectName}
-          </Link>
+          </span>
         </h1>
       </div>
     )
