@@ -76,8 +76,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
   const indexTabs = (
     <div
       className={clsx(
-        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse transition-colors ease-in-out duration-500",
-        `text-${textColor}`
+        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse"
       )}
     >
       {projects.map((project) => (
