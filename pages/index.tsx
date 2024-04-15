@@ -3,7 +3,7 @@ import Layout, { Header } from "@/components/Layout"
 import clsx from "clsx"
 import { GetStaticProps } from "next"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { CSSProperties, useEffect, useState } from "react"
 
 // TODO: consider making these configurable in Strapi, along with splash screen bg + text. lots of strapi customizability basically
 const SPLASH_DURATION = 2100
@@ -14,13 +14,14 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { projects } }
 }
 
-function Splash({ className }: { className?: string }) {
+function Splash({ className, style }: { className?: string, style?: CSSProperties }) {
   return (
     <div
       className={clsx(
         "z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-screen flex justify-center items-center",
         className
       )}
+      style={style}
     >
       <div className="text-center text-white">
         &copy; 2024 Current Services &amp; All Parties Mentioned Herein
@@ -56,11 +57,10 @@ export default function Home({ projects }: { projects: IProject[] }) {
     <div>
       {firstLoad && (
         <Splash
-          className={
-            clearSplash
-              ? `ease-in-out opacity-0 transition-opacity duration-[${SPLASH_FADE_DURATION}ms]`
-              : ""
-          }
+          style={{
+            transition: `opacity ${SPLASH_FADE_DURATION}ms`,
+            opacity: clearSplash ? 0 : 1,
+          }}
         />
       )}
 
