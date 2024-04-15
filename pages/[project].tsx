@@ -30,97 +30,96 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return { props: { project, projects } }
 }
 
-const Slide = memo(
-  ({
-    slide,
-    prevSlide,
-    nextSlide,
-  }: {
-    slide: ISlide
-    prevSlide: Function
-    nextSlide: Function
-  }) => {
-    // TODO: make add this to strapi instead
-    const Media = ({ url }: { url: string }) => {
-      if (url.endsWith(".mp4") || url.endsWith(".mov")) {
-        return (
-          <video
-            autoPlay
-            muted
-            loop
-            className="w-full h-full sm:object-cover"
-            src={url}
-          />
-        )
-      } else {
-        return <img className="w-full h-full sm:object-cover" src={url} />
-      }
+const SlideComponent = ({
+  slide,
+  prevSlide,
+  nextSlide,
+}: {
+  slide: ISlide
+  prevSlide: Function
+  nextSlide: Function
+}) => {
+  // TODO: make add this to strapi instead
+  const Media = ({ url }: { url: string }) => {
+    if (url.endsWith(".mp4") || url.endsWith(".mov")) {
+      return (
+        <video
+          autoPlay
+          muted
+          loop
+          className="w-full h-full sm:object-cover"
+          src={url}
+        />
+      )
+    } else {
+      return <img className="w-full h-full sm:object-cover" src={url} />
     }
-
-    return (
-      <div
-        className="w-full h-screen relative snap-start"
-        onClick={(e) => {
-          const clickPosition = e.clientY
-          const halfScreenHeight = window.innerHeight / 2
-          if (clickPosition <= halfScreenHeight) {
-            prevSlide()
-          } else {
-            nextSlide()
-          }
-        }}
-      >
-        <div
-          className="z-[-1] absolute top-0 left-0 w-full h-full"
-          style={{
-            backgroundColor: slide.bgMaskColor,
-            opacity: slide.bgMaskOpacity,
-          }}
-        ></div>
-        <div className="z-[-2] hidden sm:block xl:hidden absolute top-0 left-0 w-full h-full">
-          {slide.desktopBg?.data?.attributes?.url && (
-            <Media url={BASE_URL + slide.desktopBg.data.attributes.url} />
-          )}
-        </div>
-        <div className="z-[-2] block sm:hidden xl:hidden absolute top-0 left-0 w-full h-full">
-          {slide.mobileBg?.data?.attributes?.url && (
-            <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
-          )}
-        </div>
-        {/* We will need to make this a larger display from our Strapi */}
-        <div className="z-[-2] hidden sm:hidden xl:block absolute top-0 left-0 w-full h-full">
-          {slide.mobileBg?.data?.attributes?.url && (
-            //Change to slide.largeDisplayBG...
-            <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
-          )}
-        </div>
-        <div className="px-24 py-36">
-          <p
-            className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
-          >
-            {slide.description}
-          </p>
-
-          {slide.services && (
-            <div className="grid grid-flow-col auto-cols-min grid-rows-4 gap-4 w-full gap-y-0">
-              {slide.services.map((service, index) => (
-                <p
-                  key={index}
-                  className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[24px] text-[18px] leading-[135%] tracking-[-0.21px]`}
-                >
-                  {service}
-                </p>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    )
-  },
-  (prevProps, nextProps) => {
-    return prevProps.slide.id === nextProps.slide.id
   }
-)
+
+  return (
+    <div
+      className="w-full h-screen relative snap-start"
+      onClick={(e) => {
+        const clickPosition = e.clientY
+        const halfScreenHeight = window.innerHeight / 2
+        if (clickPosition <= halfScreenHeight) {
+          prevSlide()
+        } else {
+          nextSlide()
+        }
+      }}
+    >
+      <div
+        className="z-[-1] absolute top-0 left-0 w-full h-full"
+        style={{
+          backgroundColor: slide.bgMaskColor,
+          opacity: slide.bgMaskOpacity,
+        }}
+      ></div>
+      <div className="z-[-2] hidden sm:block xl:hidden absolute top-0 left-0 w-full h-full">
+        {slide.desktopBg?.data?.attributes?.url && (
+          <Media url={BASE_URL + slide.desktopBg.data.attributes.url} />
+        )}
+      </div>
+      <div className="z-[-2] block sm:hidden xl:hidden absolute top-0 left-0 w-full h-full">
+        {slide.mobileBg?.data?.attributes?.url && (
+          <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
+        )}
+      </div>
+      {/* We will need to make this a larger display from our Strapi */}
+      <div className="z-[-2] hidden sm:hidden xl:block absolute top-0 left-0 w-full h-full">
+        {slide.mobileBg?.data?.attributes?.url && (
+          //Change to slide.largeDisplayBG...
+          <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
+        )}
+      </div>
+      <div className="px-24 py-36">
+        <p
+          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
+        >
+          {slide.description}
+        </p>
+
+        {slide.services && (
+          <div className="grid grid-flow-col auto-cols-min grid-rows-4 gap-4 w-full gap-y-0">
+            {slide.services.map((service, index) => (
+              <p
+                key={index}
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[24px] text-[18px] leading-[135%] tracking-[-0.21px]`}
+              >
+                {service}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+const Slide = memo(SlideComponent, (prevProps, nextProps) => {
+  return prevProps.slide.id === nextProps.slide.id
+})
 
 const ProjectPage = ({
   project,
