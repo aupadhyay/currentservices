@@ -119,13 +119,13 @@ export default function Layout({
 
   return (
     <div
-      className={clsx("w-full h-full sm:h-screen relative", color && `bg-${color}`, className)}
+      className={clsx("w-full h-screen relative", color && `bg-${color}`, className)}
       style={{
         cursor: `${cursorUrl}, auto`,
       }}
       ref={mouseRef}
     >
-      <div className="relative sm:fixed z-20 w-full sm:px-20 px-10 sm:top-20 top-10">
+      <div className="fixed z-20 w-full sm:px-20 px-10 sm:top-20 top-10">
         {top}
       </div>
       <div
@@ -135,7 +135,7 @@ export default function Layout({
         {children}
       </div>
 
-      <div className="relative sm:fixed sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10">
+      <div className="fixed sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10">
         {bottom}
       </div>
     </div>

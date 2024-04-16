@@ -1,8 +1,8 @@
-import clsx from "clsx"
-import Link from "next/link"
-import Layout, { Header } from "../components/Layout"
-import { useEffect, useState } from "react"
 import { screens } from "@/tailwind.config";
+import clsx from "clsx";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Layout, { Header } from "../components/Layout";
 
 export default function About() {
   const colophon = ["Colophon"]
