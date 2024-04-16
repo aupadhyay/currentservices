@@ -116,6 +116,8 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         autoPlay
         muted
         loop
+        playsInline
+        controls={false}
         className="absolute top-1/2 left-1/2 min-w-full min-h-full max-w-none"
         style={{
           transform: "translate(-50%, -50%)",
