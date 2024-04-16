@@ -45,6 +45,8 @@ const SlideComponent = ({
       return (
         <video
           autoPlay
+          playsInline
+          controls={false}
           muted
           loop
           className="w-full h-full sm:object-cover"
