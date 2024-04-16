@@ -60,7 +60,7 @@ const SlideComponent = ({
 
   return (
     <div
-      className="w-full h-screen relative snap-start"
+      className="w-full h-screen relative snap-start max-h-screen overflow-y-hidden"
       onClick={(e) => {
         const clickPosition = e.clientY
         const halfScreenHeight = window.innerHeight / 2
