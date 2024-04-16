@@ -1,6 +1,8 @@
 import clsx from "clsx"
 import Link from "next/link"
 import Layout, { Header } from "../components/Layout"
+import { useEffect, useState } from "react"
+import { screens } from "@/tailwind.config";
 
 export default function About() {
   const colophon = ["Colophon"]
@@ -90,57 +92,42 @@ export default function About() {
     purposes without express\
     written permission."
 
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Function to check if the screen width is below a certain threshold
+  const checkScreenWidth = () => {
+    setIsMobile(window.innerWidth < screens.sm); // Adjust the threshold as needed
+  };
+
+    useEffect(() => {
+      checkScreenWidth(); // Initial check
+      window.addEventListener('resize', checkScreenWidth);
+      return () => {
+        window.removeEventListener('resize', checkScreenWidth);
+      };
+    }, []);
+
   return (
     <Layout
       color="[#FF242F]"
       top={
-        <Header showIndex={false} showColophon={false} />
+        <Header showIndex={isMobile} showColophon={false} />
       }
       cursor='angled'
       bottom={
         <div>
           <h1
             className={clsx(
-              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500",
+              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500 ",
             )}
           >
-            <Link href="/" className="cursor-[inherit]">Index</Link>
+            <Link href="/" className="cursor-[inherit] hover:border-b-2 sm:hover:border-b-0">Index</Link>
           </h1>
         </div>
       }
     >
-    {/* <div className="flex justify-center items-center h-full ">
-      <div className="flex justify-between w-full px-40">
-        <div className="flex-1 px-4">
-          {firstCol.map((colArray, colIndex) => (
-            <div className="flex-1 px-10 py-5" key={colIndex}>
-              {colArray.map((item, itemIndex) => (
-                <p className="text-white text-base" key={itemIndex}>
-                  {item}
-                </p>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="flex-1 px-4">
-          {secondCol.map((colArray, colIndex) => (
-            <div className="flex-1 px-10 py-5" key={colIndex}>
-              {colArray.map((item, itemIndex) => (
-                <p className="text-white text-base" key={itemIndex}>
-                  {item || <br/>}
-                </p>
-              ))}
-            </div>
-          ))}
-        </div>
-        <div className="flex-1 px-4">
-          <p className="text-white text-base my-5">
-            {thirdCol}
-          </p>
-        </div>
-      </div>
-    </div> */}
-
+   
 <div className="flex justify-center items-center py-28 sm:h-full sm:px-40 py-0">
   <div className="grid grid-cols-1 sm:grid-cols-3">
     <div className="flex-1 px-4 pb-10 sm:pb-0">

@@ -28,6 +28,7 @@ export type ISlide = {
   textColor: "white" | "black" // Text color for all text
   desktopBg: IMedia // Desktop background
   mobileBg: IMedia // Mobile background
+  largeDesktopBg: IMedia //Large Desktop background
   cursor: ICursor // Cursor design
   bgMaskColor: string // Background mask color
   bgMaskOpacity: string // Background mask opacity
@@ -78,7 +79,7 @@ const getProjectById = async (id: string) => {
 
 const getProjectBySlug = async (slug: string) => {
   const projects = await get(
-    `${API_URL}/projects?filters[slug][$eq]=${slug}&populate=slides.desktopBg,slides.mobileBg`
+    `${API_URL}/projects?filters[slug][$eq]=${slug}&populate=slides.desktopBg,slides.mobileBg,slides.largeDesktopBg`
   )
   if (projects.data.length === 0) {
     return null

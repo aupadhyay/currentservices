@@ -29,12 +29,20 @@ const config: Config = {
       '3xl': '1.8rem',
     },
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px', 
-      'xl': '2580px',     
+      sm: '640px',
+      md: '768px',
+      lg: '1024px', 
+      xl: '2580px',     
     },
   },
   plugins: [],
 };
+
+export const screens = {
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 2580,
+};
+
 export default config;

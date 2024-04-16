@@ -86,11 +86,9 @@ const SlideComponent = ({
           <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
         )}
       </div>
-      {/* We will need to make this a larger display from our Strapi */}
       <div className="z-[-2] hidden sm:hidden xl:block absolute top-0 left-0 w-full h-full">
-        {slide.mobileBg?.data?.attributes?.url && (
-          //Change to slide.largeDisplayBG...
-          <Media url={BASE_URL + slide.mobileBg.data.attributes.url} />
+        {slide.largeDesktopBg?.data?.attributes?.url && (
+          <Media url={BASE_URL + slide.largeDesktopBg.data.attributes.url} />
         )}
       </div>
       <div className="px-24 py-36">
