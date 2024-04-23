@@ -95,7 +95,7 @@ const SlideComponent = ({
       </div>
       <div className="pl-[16.67%] pt-[16.67%]">
         <p
-          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px] `}
+          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
         >
           {slide.description}
         </p>
@@ -104,7 +104,7 @@ const SlideComponent = ({
           <div className="grid grid-cols-3 mt-10">
             <div className="col-span-1">
               <p
-                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
               >
                 Services rendered
               </p>
@@ -113,7 +113,7 @@ const SlideComponent = ({
               {slide.services.map((service, index) => (
                 <p
                   key={index}
-                  className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
+                  className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
                 >
                   {service}
                 </p>
@@ -229,18 +229,18 @@ const ProjectPage = ({
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
-          <Link href="/" className="cursor-[inherit]">
+          <Link href="/" className="cursor-[inherit] text-2xl">
             Index
           </Link>
         </h1>
         <h1
           className={clsx(
-            "font-favorit font-book text-[32px]",
+            "font-favorit font-book text-2xl",
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
           <span
-            className="cursor-[inherit]"
+            className="cursor-[inherit] text-2xl"
             onClick={() => {
               window.location.href = `/${nextProject.slug}`
             }}

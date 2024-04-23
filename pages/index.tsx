@@ -88,7 +88,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           }}
           onMouseLeave={() => setSelected(projects[0])}
           className={clsx(
-            "select-none text-xl w-fit cursor-[inherit] px-3",
+            "select-none text-2xl w-fit cursor-[inherit] px-3",
             `text-${textColor}`
           )}
         >

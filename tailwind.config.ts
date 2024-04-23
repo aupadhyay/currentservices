@@ -25,11 +25,12 @@ const config: Config = {
       bold: '700',
     },
     fontSize: {
-      '2xl': '1.5rem',
-      '3xl': '1.8rem',
+      'xl': '24px',
+      '2xl': '28px',
+      '3xl': '32px',
     },
     screens: {
-      sm: '850px',
+      sm: '800px',
       md: '900px',
       lg: '1024px', 
       xl: '2580px',     
