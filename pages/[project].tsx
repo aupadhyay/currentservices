@@ -93,9 +93,9 @@ const SlideComponent = ({
           <Media url={BASE_URL + slide.largeDesktopBg.data.attributes.url} />
         )}
       </div>
-      <div className="px-24 py-36">
+      <div className="pl-[16.67%] pt-[16.67%]">
         <p
-          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px]`}
+          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-[32px] text-[21px] leading-[135%] tracking-[-0.21px] `}
         >
           {slide.description}
         </p>
