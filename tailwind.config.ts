@@ -29,8 +29,8 @@ const config: Config = {
       '3xl': '1.8rem',
     },
     screens: {
-      sm: '640px',
-      md: '768px',
+      sm: '850px',
+      md: '900px',
       lg: '1024px', 
       xl: '2580px',     
     },

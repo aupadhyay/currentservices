@@ -106,7 +106,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
   )
 
   const header = (selected: IProject) => (
-    <Header color={selected.indexTextColor} showIndex={true} />
+    <Header color={selected.indexTextColor} showIndex={false} />
   )
 
   const videos = (selected: IProject) => {
