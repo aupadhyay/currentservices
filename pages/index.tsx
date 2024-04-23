@@ -94,8 +94,8 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         >
           <span
             className={clsx(
-              "w-fit hover:border-b-2 border-current transition-colors ease-in-out duration-500",
-              selected.slug === project.slug && "border-b-2 border-current"
+              "w-fit hover:underline underline-offset-10 decoration-2	transition-colors ease-in-out duration-500",
+              selected.slug === project.slug && "underline underline-offset-10 decoration-2"
             )}
           >
             {project.title}

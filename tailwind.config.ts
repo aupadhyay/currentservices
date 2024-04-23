@@ -34,6 +34,9 @@ const config: Config = {
       lg: '1024px', 
       xl: '2580px',     
     },
+    textUnderlineOffset: {
+      '10': '10px',
+    },
   },
   plugins: [],
 };
