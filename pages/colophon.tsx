@@ -126,6 +126,7 @@ export default function About() {
           </h1>
         </div>
       }
+      colophon={true}
     >
    
 <div className="flex justify-center items-center py-28 sm:h-full sm:px-40 py-0">

@@ -88,6 +88,8 @@ export default function Layout({
   scrollRef,
   className = "",
   children,
+  colophon = false,
+  about = false
 }: {
   color?: string
   textColor?: "white" | "black"
@@ -97,6 +99,8 @@ export default function Layout({
   cursor?: ICursor
   children?: React.ReactNode
   scrollRef?: React.RefObject<HTMLDivElement>
+  colophon?: Boolean
+  about?: Boolean
 }) {
   const mouseRef = useRef<HTMLDivElement>(null)
   const [mouseY, setMouseY] = useState<number>(0)
@@ -119,13 +123,13 @@ export default function Layout({
 
   return (
     <div
-      className={clsx("w-full h-screen relative", color && `bg-${color}`, className)}
+      className={clsx("w-full relative", color && `bg-${color}`, colophon || about ? "h-full sm:h-screen" : "h-screen", className)}
       style={{
         cursor: `${cursorUrl}, auto`,
       }}
       ref={mouseRef}
     >
-      <div className="fixed z-20 w-full sm:px-20 px-10 sm:top-20 top-10">
+      <div className={clsx("z-20 w-full sm:px-20 px-10 sm:top-20 top-10", colophon || about ? "relative sm:fixed" : "fixed")}>
         {top}
       </div>
       <div
@@ -135,10 +139,9 @@ export default function Layout({
         {children}
       </div>
 
-      <div className="fixed sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10">
+      <div className={clsx("sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10", colophon || about ? "relative sm:fixed" : "fixed")}>
         {bottom}
       </div>
     </div>
-
   )
 }

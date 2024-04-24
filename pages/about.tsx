@@ -50,6 +50,7 @@ export default function About() {
           </h1>
         </div>
       }
+      about={true}
     >
       <div className="px-10 sm:px-48 py-32">
         <p className="hidden sm:block text-white text-2xl w-3/4">
