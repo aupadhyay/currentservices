@@ -88,7 +88,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           }}
           onMouseLeave={() => setSelected(projects[0])}
           className={clsx(
-            "select-none text-2xl w-fit cursor-[inherit] px-3",
+            "select-none text-xl w-fit cursor-[inherit] px-3",
             `text-${textColor}`
           )}
         >
@@ -118,7 +118,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         loop
         playsInline
         controls={false}
-        className="absolute top-1/2 left-1/2 min-w-full min-h-full max-w-none"
+        className="absolute top-1/2 left-1/2 min-w-full min-h-full max-w-none sm:object-cover"
         style={{
           transform: "translate(-50%, -50%)",
           zIndex: selected.slug === project.slug ? 1 : 0,
