@@ -143,7 +143,7 @@ const ProjectPage = ({
   const nextSlide = (currProject: IProject) => {
     if (scrollRef.current === null) return
     scrollRef.current.scrollBy({
-      top: window.outerHeight,
+      top: window.innerHeight,
       behavior: "smooth",
     })
     setSlideNumber((old) =>
@@ -154,7 +154,7 @@ const ProjectPage = ({
   const prevSlide = () => {
     if (scrollRef.current === null) return
     scrollRef.current.scrollBy({
-      top: -window.outerHeight,
+      top: -window.innerHeight,
       behavior: "smooth",
     })
     setSlideNumber((old) => (old - 1 < 0 ? old : old - 1))
