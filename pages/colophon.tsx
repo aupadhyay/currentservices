@@ -133,7 +133,7 @@ export default function About() {
   <div className="grid grid-cols-1 sm:grid-cols-3">
     <div className="flex-1 px-4 pb-10 sm:pb-0">
       {firstCol.map((colArray, colIndex) => (
-        <div className="flex-1 px-10 py-5" key={colIndex}>
+        <div className="flex-1 px-6 py-5" key={colIndex}>
           {colArray.map((item, itemIndex) => (
             <p className="text-white text-base" key={itemIndex}>
               {item}
@@ -144,7 +144,7 @@ export default function About() {
     </div>
     <div className="flex-1 px-4 pb-10 sm:pb-0">
       {secondCol.map((colArray, colIndex) => (
-        <div className="flex-1 px-10 py-5" key={colIndex}>
+        <div className="flex-1 px-6 py-5" key={colIndex}>
           {colArray.map((item, itemIndex) => (
             <p className="text-white text-base" key={itemIndex}>
               {item || <br />}
@@ -154,7 +154,7 @@ export default function About() {
       ))}
     </div>
     <div className="flex-1 px-4">
-      <p className="text-white text-base px-10 py-5">
+      <p className="text-white text-base px-6 py-5">
         {thirdCol}
       </p>
     </div>
