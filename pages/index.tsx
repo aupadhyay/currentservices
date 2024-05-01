@@ -23,7 +23,7 @@ function Splash({ className, style }: { className?: string, style?: CSSPropertie
       )}
       style={style}
     >
-      <div className="text-center text-white">
+      <div className="text-center text-white px-16">
         &copy; 2024 Current Services &amp; All Parties Mentioned Herein
       </div>
     </div>
@@ -40,18 +40,32 @@ export default function Home({ projects }: { projects: IProject[] }) {
       window.sessionStorage &&
       window.sessionStorage.getItem("firstLoad") == null
     ) {
-      setFirstLoad(true)
+      setFirstLoad(true);
       const timer = setTimeout(() => {
-        setClearSplash(true)
-        window.sessionStorage.setItem("firstLoad", "false")
+        setClearSplash(true);
+        window.sessionStorage.setItem("firstLoad", "false");
         setTimeout(() => {
-          setFirstLoad(false)
-        }, SPLASH_FADE_DURATION)
-      }, SPLASH_DURATION)
+          setFirstLoad(false);
+        }, SPLASH_FADE_DURATION);
+      }, SPLASH_DURATION);
 
-      return () => clearTimeout(timer)
+      const handleClick = () => {
+        clearTimeout(timer);
+        setClearSplash(true);
+        window.sessionStorage.setItem("firstLoad", "false");
+        setTimeout(() => {
+          setFirstLoad(false);
+        }, SPLASH_FADE_DURATION);
+      };
+
+      window.addEventListener('click', handleClick);
+
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('click', handleClick);
+      };
     }
-  }, [])
+  }, []);
 
   return (
     <div>
