@@ -30,7 +30,7 @@ const config: Config = {
       '3xl': '32px',
     },
     screens: {
-      sm: '800px',
+      sm: '706px',
       md: '900px',
       lg: '1024px', 
       xl: '2580px',     
