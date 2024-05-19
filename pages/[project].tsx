@@ -109,8 +109,18 @@ const SlideComponent = ({
                 Services rendered
               </p>
             </div>
-            <div className="col-span-2 grid grid-cols-2">
-              {slide.services.map((service, index) => (
+            <div className="col-span-1">
+              {slide.services.slice(0, Math.ceil(slide.services.length / 2)).map((service, index) => (
+              <p
+                key={index}
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
+              >
+                {service}
+              </p>
+            ))}
+            </div>
+            <div className="col-span-1">
+              {slide.services.slice(Math.ceil(slide.services.length / 2)).map((service, index) => (
                 <p
                   key={index}
                   className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
