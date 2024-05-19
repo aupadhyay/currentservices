@@ -129,7 +129,7 @@ export default function About() {
       colophon={true}
     >
    
-<div className="flex justify-center items-center py-28 sm:h-full sm:px-40 py-0">
+<div className="justify-center py-28 items-center sm:h-full sm:px-[10%]">
   <div className="grid grid-cols-1 sm:grid-cols-3">
     <div className="flex-1 px-4 pb-10 sm:pb-0">
       {firstCol.map((colArray, colIndex) => (
