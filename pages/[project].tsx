@@ -245,7 +245,7 @@ const ProjectPage = ({
               window.location.href = `/${nextProject.slug}`
             }}
           >
-            Next - {nextProjectName}
+            Next — {nextProjectName}
           </span>
         </h1>
       </div>
