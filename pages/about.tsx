@@ -1,9 +1,9 @@
-import clsx from "clsx";
-import Link from "next/link";
-import Layout, { Header } from "../components/Layout";
+import clsx from "clsx"
+import Link from "next/link"
+import Layout, { Header } from "../components/Layout"
 
 export default function About() {
-  const serviceTitles = ["Idea", "Brand", "Content", "Growth"];
+  const serviceTitles = ["Idea", "Brand", "Content", "Growth"]
 
   const services = [
     "Research",
@@ -22,10 +22,10 @@ export default function About() {
     "Venture Planning",
     "Capital Strategy",
     "Forecasting",
-  ];
-  const wordsPerTitleList = 1;
-  const wordsPerList = 4;
-  const numColumns = 4;
+  ]
+  const wordsPerTitleList = 1
+  const wordsPerList = 4
+  const numColumns = 4
 
   return (
     <Layout
@@ -36,7 +36,7 @@ export default function About() {
         <div>
           <h1
             className={clsx(
-              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500",
+              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500"
             )}
           >
             <Link href="/" className="cursor-[inherit]">
@@ -87,7 +87,7 @@ export default function About() {
               {serviceTitles
                 .slice(
                   columnIndex * wordsPerTitleList,
-                  (columnIndex + 1) * wordsPerTitleList,
+                  (columnIndex + 1) * wordsPerTitleList
                 )
                 .map((word, index) => (
                   <p
@@ -106,7 +106,7 @@ export default function About() {
               {services
                 .slice(
                   columnIndex * wordsPerList,
-                  (columnIndex + 1) * wordsPerList,
+                  (columnIndex + 1) * wordsPerList
                 )
                 .map((word, index) => (
                   <p
@@ -126,7 +126,7 @@ export default function About() {
               {serviceTitles
                 .slice(
                   columnIndex * wordsPerTitleList,
-                  (columnIndex + 1) * wordsPerTitleList,
+                  (columnIndex + 1) * wordsPerTitleList
                 )
                 .map((word, index) => (
                   <p
@@ -139,7 +139,7 @@ export default function About() {
               {services
                 .slice(
                   columnIndex * wordsPerList,
-                  (columnIndex + 1) * wordsPerList,
+                  (columnIndex + 1) * wordsPerList
                 )
                 .map((word, index) => (
                   <p
@@ -155,5 +155,5 @@ export default function About() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }

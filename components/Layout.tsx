@@ -1,16 +1,16 @@
-import { ICursor } from "@/api";
-import clsx from "clsx";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { ICursor } from "@/api"
+import clsx from "clsx"
+import Link from "next/link"
+import { useEffect, useRef, useState } from "react"
 
 export function Header({
   color = "white",
   showIndex = true,
   showColophon = false,
 }: {
-  color?: string;
-  showIndex?: boolean;
-  showColophon?: boolean;
+  color?: string
+  showIndex?: boolean
+  showColophon?: boolean
 }) {
   return (
     <div className="flex justify-between w-full">
@@ -18,7 +18,7 @@ export function Header({
         <h1
           className={clsx(
             "font-favorit font-regular text-[16px] transition-colors ease-in-out duration-500",
-            `text-${color}`,
+            `text-${color}`
           )}
         >
           <Link href="/about" className="tracking-[-0.01em] cursor-[inherit]">
@@ -31,7 +31,7 @@ export function Header({
           <h1
             className={clsx(
               "font-favorit font-regular text-[16px] transition-colors ease-in-out duration-500",
-              `text-${color}`,
+              `text-${color}`
             )}
           >
             <Link className="cursor-[inherit]" href="/">
@@ -45,7 +45,7 @@ export function Header({
           <h1
             className={clsx(
               "font-favorit font-regular text-[16px] transition-colors ease-in-out duration-500",
-              `text-${color}`,
+              `text-${color}`
             )}
           >
             <Link href="/colophon" className="cursor-[inherit]">
@@ -55,16 +55,16 @@ export function Header({
         </div>
       )}
     </div>
-  );
+  )
 }
 
 function getCursor(
   cursor: "vertical" | "angled" | "normal",
   direction: "down" | "up",
-  color: "white" | "black",
+  color: "white" | "black"
 ) {
   const cursors: {
-    [key: string]: string;
+    [key: string]: string
   } = {
     "angled-white": `url(/cursors/angled-white.svg)`,
     "angled-black": `url(/cursors/angled-black.svg)`,
@@ -73,14 +73,14 @@ function getCursor(
     "vertical-up-white": `url(/cursors/vertical-up-white.svg)`,
     "vertical-up-black": `url(/cursors/vertical-up-black.svg)`,
     normal: "normal",
-  };
+  }
 
   const cursorPath =
     cursors[`${cursor}-${direction}-${color}`] ||
     cursors[`${cursor}-${direction}`] ||
     cursors[`${cursor}-${color}`] ||
-    cursors[cursor];
-  return cursorPath;
+    cursors[cursor]
+  return cursorPath
 }
 
 export default function Layout({
@@ -95,37 +95,37 @@ export default function Layout({
   colophon = false,
   about = false,
 }: {
-  color?: string;
-  textColor?: "white" | "black";
-  top?: React.ReactNode;
-  bottom?: React.ReactNode;
-  className?: string;
-  cursor?: ICursor;
-  children?: React.ReactNode;
-  scrollRef?: React.RefObject<HTMLDivElement>;
-  colophon?: Boolean;
-  about?: Boolean;
+  color?: string
+  textColor?: "white" | "black"
+  top?: React.ReactNode
+  bottom?: React.ReactNode
+  className?: string
+  cursor?: ICursor
+  children?: React.ReactNode
+  scrollRef?: React.RefObject<HTMLDivElement>
+  colophon?: Boolean
+  about?: Boolean
 }) {
-  const mouseRef = useRef<HTMLDivElement>(null);
-  const [mouseY, setMouseY] = useState<number>(0);
+  const mouseRef = useRef<HTMLDivElement>(null)
+  const [mouseY, setMouseY] = useState<number>(0)
   const [cursorUrl, setCursorUrl] = useState<string>(
-    getCursor(cursor, "down", textColor),
-  );
+    getCursor(cursor, "down", textColor)
+  )
 
   useEffect(() => {
-    const direction = mouseY > window.innerHeight / 2 ? "down" : "up";
-    setCursorUrl(getCursor(cursor, direction, textColor));
-  }, [cursor, textColor, mouseY]);
+    const direction = mouseY > window.innerHeight / 2 ? "down" : "up"
+    setCursorUrl(getCursor(cursor, direction, textColor))
+  }, [cursor, textColor, mouseY])
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMouseY(e.clientY);
-    };
-    mouseRef.current?.addEventListener("mousemove", handleMouseMove);
+      setMouseY(e.clientY)
+    }
+    mouseRef.current?.addEventListener("mousemove", handleMouseMove)
     return () => {
-      mouseRef.current?.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+      mouseRef.current?.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [])
 
   return (
     <div
@@ -133,7 +133,7 @@ export default function Layout({
         "w-full relative",
         color && `bg-${color}`,
         colophon || about ? "h-full sm:h-screen" : "h-screen",
-        className,
+        className
       )}
       style={{
         cursor: `${cursorUrl}, auto`,
@@ -143,7 +143,7 @@ export default function Layout({
       <div
         className={clsx(
           "z-20 w-full sm:px-20 px-10 sm:top-20 top-10",
-          colophon || about ? "relative sm:fixed" : "fixed",
+          colophon || about ? "relative sm:fixed" : "fixed"
         )}
       >
         {top}
@@ -158,11 +158,11 @@ export default function Layout({
       <div
         className={clsx(
           "sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10",
-          colophon || about ? "relative sm:fixed" : "fixed",
+          colophon || about ? "relative sm:fixed" : "fixed"
         )}
       >
         {bottom}
       </div>
     </div>
-  );
+  )
 }

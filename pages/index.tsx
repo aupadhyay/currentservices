@@ -1,31 +1,31 @@
-import { BASE_URL, IProject, getProjects } from "@/api";
-import Layout, { Header } from "@/components/Layout";
-import clsx from "clsx";
-import { GetStaticProps } from "next";
-import Link from "next/link";
-import { CSSProperties, useEffect, useState } from "react";
+import { BASE_URL, IProject, getProjects } from "@/api"
+import Layout, { Header } from "@/components/Layout"
+import clsx from "clsx"
+import { GetStaticProps } from "next"
+import Link from "next/link"
+import { CSSProperties, useEffect, useState } from "react"
 
 // TODO: consider making these configurable in Strapi, along with splash screen bg + text. lots of strapi customizability basically
-const SPLASH_DURATION = 2100;
-const SPLASH_FADE_DURATION = 600;
+const SPLASH_DURATION = 2100
+const SPLASH_FADE_DURATION = 600
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getProjects({ includeSlides: false });
-  return { props: { projects } };
-};
+  const projects = await getProjects({ includeSlides: false })
+  return { props: { projects } }
+}
 
 function Splash({
   className,
   style,
 }: {
-  className?: string;
-  style?: CSSProperties;
+  className?: string
+  style?: CSSProperties
 }) {
   return (
     <div
       className={clsx(
         "z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-screen flex justify-center items-center",
-        className,
+        className
       )}
       style={style}
     >
@@ -33,12 +33,12 @@ function Splash({
         &copy; 2024 Current Services &amp; All Parties Mentioned Herein
       </div>
     </div>
-  );
+  )
 }
 
 export default function Home({ projects }: { projects: IProject[] }) {
-  const [firstLoad, setFirstLoad] = useState(false);
-  const [clearSplash, setClearSplash] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(false)
+  const [clearSplash, setClearSplash] = useState(false)
 
   useEffect(() => {
     if (
@@ -46,32 +46,32 @@ export default function Home({ projects }: { projects: IProject[] }) {
       window.sessionStorage &&
       window.sessionStorage.getItem("firstLoad") == null
     ) {
-      setFirstLoad(true);
+      setFirstLoad(true)
       const timer = setTimeout(() => {
-        setClearSplash(true);
-        window.sessionStorage.setItem("firstLoad", "false");
+        setClearSplash(true)
+        window.sessionStorage.setItem("firstLoad", "false")
         setTimeout(() => {
-          setFirstLoad(false);
-        }, SPLASH_FADE_DURATION);
-      }, SPLASH_DURATION);
+          setFirstLoad(false)
+        }, SPLASH_FADE_DURATION)
+      }, SPLASH_DURATION)
 
       const handleClick = () => {
-        clearTimeout(timer);
-        setClearSplash(true);
-        window.sessionStorage.setItem("firstLoad", "false");
+        clearTimeout(timer)
+        setClearSplash(true)
+        window.sessionStorage.setItem("firstLoad", "false")
         setTimeout(() => {
-          setFirstLoad(false);
-        }, SPLASH_FADE_DURATION);
-      };
+          setFirstLoad(false)
+        }, SPLASH_FADE_DURATION)
+      }
 
-      window.addEventListener("click", handleClick);
+      window.addEventListener("click", handleClick)
 
       return () => {
-        clearTimeout(timer);
-        window.removeEventListener("click", handleClick);
-      };
+        clearTimeout(timer)
+        window.removeEventListener("click", handleClick)
+      }
     }
-  }, []);
+  }, [])
 
   return (
     <div>
@@ -86,17 +86,17 @@ export default function Home({ projects }: { projects: IProject[] }) {
 
       <Index projects={projects} />
     </div>
-  );
+  )
 }
 
 export const Index = ({ projects }: { projects: IProject[] }) => {
-  const [selected, setSelected] = useState<IProject>(projects[0]);
-  const textColor = selected.indexTextColor;
+  const [selected, setSelected] = useState<IProject>(projects[0])
+  const textColor = selected.indexTextColor
 
   const indexTabs = (
     <div
       className={clsx(
-        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse",
+        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse"
       )}
     >
       {projects.map((project) => (
@@ -104,19 +104,19 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           href={`/${project.slug}`}
           key={project.slug}
           onMouseEnter={() => {
-            setSelected(project);
+            setSelected(project)
           }}
           onMouseLeave={() => setSelected(projects[0])}
           className={clsx(
             "select-none text-xl w-fit cursor-[inherit] px-3",
-            `text-${textColor}`,
+            `text-${textColor}`
           )}
         >
           <span
             className={clsx(
               "w-fit hover:underline underline-offset-10 decoration-2	transition-colors ease-in-out duration-500",
               selected.slug === project.slug &&
-                "underline underline-offset-10 decoration-2",
+                "underline underline-offset-10 decoration-2"
             )}
           >
             {project.title}
@@ -124,11 +124,11 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         </Link>
       ))}
     </div>
-  );
+  )
 
   const header = (selected: IProject) => (
     <Header color={selected.indexTextColor} showIndex={false} />
-  );
+  )
 
   const videos = (selected: IProject) => {
     return projects.map((project) => (
@@ -146,8 +146,8 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         }}
         src={BASE_URL + project.hoverVideo.data.attributes.url}
       />
-    ));
-  };
+    ))
+  }
 
   return (
     <Layout top={header(selected)} bottom={indexTabs} cursor="angled">
@@ -155,5 +155,5 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         {videos(selected)}
       </div>
     </Layout>
-  );
-};
+  )
+}

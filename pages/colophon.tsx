@@ -1,53 +1,53 @@
-import { screens } from "@/tailwind.config";
-import clsx from "clsx";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import Layout, { Header } from "../components/Layout";
+import { screens } from "@/tailwind.config"
+import clsx from "clsx"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import Layout, { Header } from "../components/Layout"
 
 export default function About() {
-  const colophon = ["Colophon"];
+  const colophon = ["Colophon"]
 
   const artifactInfo = [
     "Artifact",
     "Founders  Maxim Tsiring and Hugh Mo",
     "Strategy Director Hollis De Laney",
-  ];
+  ]
 
   const lumiereInfo = [
     "Lumiere",
     "Founder Maria Karas",
     "Published by Current Services",
-  ];
+  ]
 
   const maryGroupInfo = [
     "The Mary Group",
     "Founders  Christopher Adorno",
     "Maxim Tsiring, Justin Woehler",
-  ];
+  ]
 
-  const marketInfo = ["Market Bar and Cafe", "Founder Haskell Wells"];
+  const marketInfo = ["Market Bar and Cafe", "Founder Haskell Wells"]
 
-  const parsInfo = ["PARS UNUM", "Founder Jamme"];
+  const parsInfo = ["PARS UNUM", "Founder Jamme"]
 
-  const typefaces = ["Typefaces"];
+  const typefaces = ["Typefaces"]
 
   const artifactTypefaces = [
     "Artifact Neue Montreal by",
     "Pangram Pangram Foundry",
     "",
-  ];
+  ]
 
   const schnyderTypeface = [
     "Schnyder Wide by Commercial",
     "Type, Founders Grotesk by Klim",
     "Type Foundry",
-  ];
+  ]
 
-  const nueveTypefaces = ["Neue Haas Grotesk by", "Commercial Type", ""];
+  const nueveTypefaces = ["Neue Haas Grotesk by", "Commercial Type", ""]
 
-  const nueveMachinaTypefaces = ["Neue Machina by Pangram", "Pangram Foundry"];
+  const nueveMachinaTypefaces = ["Neue Machina by Pangram", "Pangram Foundry"]
 
-  const acuminTF = ["Acumin by Adobe"];
+  const acuminTF = ["Acumin by Adobe"]
 
   const firstCol = [
     colophon,
@@ -56,7 +56,7 @@ export default function About() {
     maryGroupInfo,
     marketInfo,
     parsInfo,
-  ];
+  ]
 
   const secondCol = [
     typefaces,
@@ -65,7 +65,7 @@ export default function About() {
     nueveTypefaces,
     nueveMachinaTypefaces,
     acuminTF,
-  ];
+  ]
 
   const thirdCol =
     "All images © 2024 by the\
@@ -76,22 +76,22 @@ export default function About() {
     otherwise disseminated,\
     datamined or used for AI\
     purposes without express\
-    written permission.";
+    written permission."
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false)
 
   // Function to check if the screen width is below a certain threshold
   const checkScreenWidth = () => {
-    setIsMobile(window.innerWidth < screens.sm); // Adjust the threshold as needed
-  };
+    setIsMobile(window.innerWidth < screens.sm) // Adjust the threshold as needed
+  }
 
   useEffect(() => {
-    checkScreenWidth(); // Initial check
-    window.addEventListener("resize", checkScreenWidth);
+    checkScreenWidth() // Initial check
+    window.addEventListener("resize", checkScreenWidth)
     return () => {
-      window.removeEventListener("resize", checkScreenWidth);
-    };
-  }, []);
+      window.removeEventListener("resize", checkScreenWidth)
+    }
+  }, [])
 
   return (
     <Layout
@@ -102,7 +102,7 @@ export default function About() {
         <div>
           <h1
             className={clsx(
-              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500 ",
+              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500 "
             )}
           >
             <Link
@@ -146,5 +146,5 @@ export default function About() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }
