@@ -5,84 +5,70 @@ import { useEffect, useState } from "react";
 import Layout, { Header } from "../components/Layout";
 
 export default function About() {
-  const colophon = ["Colophon"]
+  const colophon = ["Colophon"];
 
   const artifactInfo = [
-    "Artifact", 
+    "Artifact",
     "Founders  Maxim Tsiring and Hugh Mo",
-    "Strategy Director Hollis De Laney"
-  ]
+    "Strategy Director Hollis De Laney",
+  ];
 
   const lumiereInfo = [
     "Lumiere",
     "Founder Maria Karas",
-    "Published by Current Services"
-  ]
+    "Published by Current Services",
+  ];
 
   const maryGroupInfo = [
     "The Mary Group",
-    "Founders  Christopher Adorno", 
-    "Maxim Tsiring, Justin Woehler" 
-  ]
+    "Founders  Christopher Adorno",
+    "Maxim Tsiring, Justin Woehler",
+  ];
 
-  const marketInfo = [
-    "Market Bar and Cafe",
-    "Founder Haskell Wells"
-  ]
-  
-  const parsInfo = [
-    "PARS UNUM",
-    "Founder Jamme"
-  ]
+  const marketInfo = ["Market Bar and Cafe", "Founder Haskell Wells"];
 
-  const typefaces = ["Typefaces"]
+  const parsInfo = ["PARS UNUM", "Founder Jamme"];
+
+  const typefaces = ["Typefaces"];
 
   const artifactTypefaces = [
     "Artifact Neue Montreal by",
     "Pangram Pangram Foundry",
-    ""
-  ]
+    "",
+  ];
 
   const schnyderTypeface = [
-    "Schnyder Wide by Commercial", 
+    "Schnyder Wide by Commercial",
     "Type, Founders Grotesk by Klim",
-    "Type Foundry"
-  ]
+    "Type Foundry",
+  ];
 
-  const nueveTypefaces = [
-    "Neue Haas Grotesk by",
-    "Commercial Type",
-    ""
-  ]
+  const nueveTypefaces = ["Neue Haas Grotesk by", "Commercial Type", ""];
 
-  const nueveMachinaTypefaces = [
-    "Neue Machina by Pangram",
-    "Pangram Foundry",
-  ]
+  const nueveMachinaTypefaces = ["Neue Machina by Pangram", "Pangram Foundry"];
 
-  const acuminTF = [
-    "Acumin by Adobe",
-  ]
+  const acuminTF = ["Acumin by Adobe"];
 
   const firstCol = [
     colophon,
     artifactInfo,
-    lumiereInfo, 
-    maryGroupInfo, 
-    marketInfo, 
-    parsInfo
-  ]
+    lumiereInfo,
+    maryGroupInfo,
+    marketInfo,
+    parsInfo,
+  ];
 
   const secondCol = [
-    typefaces, 
-    artifactTypefaces, 
-    schnyderTypeface, 
-    nueveTypefaces, 
-    nueveMachinaTypefaces, 
-    acuminTF
-  ]
+    typefaces,
+    artifactTypefaces,
+    schnyderTypeface,
+    nueveTypefaces,
+    nueveMachinaTypefaces,
+    acuminTF,
+  ];
 
-  const thirdCol = "All images © 2024 by the\
+  const thirdCol =
+    "All images © 2024 by the\
     respective artist(s) as\
     commissioned or in collaboration\
     with Current  Services. Images\
@@ -90,8 +76,7 @@ export default function About() {
     otherwise disseminated,\
     datamined or used for AI\
     purposes without express\
-    written permission."
-
+    written permission.";
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -100,21 +85,19 @@ export default function About() {
     setIsMobile(window.innerWidth < screens.sm); // Adjust the threshold as needed
   };
 
-    useEffect(() => {
-      checkScreenWidth(); // Initial check
-      window.addEventListener('resize', checkScreenWidth);
-      return () => {
-        window.removeEventListener('resize', checkScreenWidth);
-      };
-    }, []);
+  useEffect(() => {
+    checkScreenWidth(); // Initial check
+    window.addEventListener("resize", checkScreenWidth);
+    return () => {
+      window.removeEventListener("resize", checkScreenWidth);
+    };
+  }, []);
 
   return (
     <Layout
       color="[#FF242F]"
-      top={
-        <Header showIndex={isMobile} showColophon={false} />
-      }
-      cursor='angled'
+      top={<Header showIndex={isMobile} showColophon={false} />}
+      cursor="angled"
       bottom={
         <div>
           <h1
@@ -122,48 +105,46 @@ export default function About() {
               "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500 ",
             )}
           >
-            <Link href="/" className="cursor-[inherit] hover:border-b-2 sm:hover:border-b-0">Index</Link>
+            <Link
+              href="/"
+              className="cursor-[inherit] hover:border-b-2 sm:hover:border-b-0"
+            >
+              Index
+            </Link>
           </h1>
         </div>
       }
       colophon={true}
     >
-   
-<div className="justify-center py-28 items-center sm:h-full sm:px-[10%]">
-  <div className="grid grid-cols-1 sm:grid-cols-3">
-    <div className="flex-1 px-4 pb-10 sm:pb-0">
-      {firstCol.map((colArray, colIndex) => (
-        <div className="flex-1 px-6 py-5" key={colIndex}>
-          {colArray.map((item, itemIndex) => (
-            <p className="text-white text-base" key={itemIndex}>
-              {item}
-            </p>
-          ))}
+      <div className="justify-center py-28 items-center sm:h-full sm:px-[10%]">
+        <div className="grid grid-cols-1 sm:grid-cols-3">
+          <div className="flex-1 px-4 pb-10 sm:pb-0">
+            {firstCol.map((colArray, colIndex) => (
+              <div className="flex-1 px-6 py-5" key={colIndex}>
+                {colArray.map((item, itemIndex) => (
+                  <p className="text-white text-base" key={itemIndex}>
+                    {item}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex-1 px-4 pb-10 sm:pb-0">
+            {secondCol.map((colArray, colIndex) => (
+              <div className="flex-1 px-6 py-5" key={colIndex}>
+                {colArray.map((item, itemIndex) => (
+                  <p className="text-white text-base" key={itemIndex}>
+                    {item || <br />}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="flex-1 px-4">
+            <p className="text-white text-base px-6 py-5">{thirdCol}</p>
+          </div>
         </div>
-      ))}
-    </div>
-    <div className="flex-1 px-4 pb-10 sm:pb-0">
-      {secondCol.map((colArray, colIndex) => (
-        <div className="flex-1 px-6 py-5" key={colIndex}>
-          {colArray.map((item, itemIndex) => (
-            <p className="text-white text-base" key={itemIndex}>
-              {item || <br />}
-            </p>
-          ))}
-        </div>
-      ))}
-    </div>
-    <div className="flex-1 px-4">
-      <p className="text-white text-base px-6 py-5">
-        {thirdCol}
-      </p>
-    </div>
-  </div>
-</div>
-
-
-
+      </div>
     </Layout>
-  )
+  );
 }
-
