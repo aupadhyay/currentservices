@@ -47,7 +47,7 @@ export default function About() {
       }
       about={true}
     >
-      <div className="px-10 sm:pl-48 py-32">
+      <div className="px-[16.66%] py-32 flex flex-col justify-center h-full">
         <p className="hidden sm:block text-white text-2xl w-3/4">
           Current Services is an interdisciplinary design and strategy practice
           founded in 2020. Operating as a core group that often extends into a
