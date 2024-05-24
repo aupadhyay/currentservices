@@ -82,6 +82,7 @@ export default function About() {
 
   // Function to check if the screen width is below a certain threshold
   const checkScreenWidth = () => {
+    console.log("width: ", window.innerWidth)
     setIsMobile(window.innerWidth < screens.sm) // Adjust the threshold as needed
   }
 
@@ -116,11 +117,11 @@ export default function About() {
       }
       colophon={true}
     >
-      <div className="justify-center py-28 items-center sm:h-full sm:px-[16.66%]">
-        <div className="grid grid-cols-1 sm:grid-cols-3">
-          <div className="flex-1 pr-4 pb-10 sm:pb-0">
+      <div className="flex flex-col justify-center py-28 items-center sm:h-full px-10 sm:px-20 md:px-[16.66%]">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="pb-10 sm:pb-0">
             {firstCol.map((colArray, colIndex) => (
-              <div className="flex-1 pr-6 py-5" key={colIndex}>
+              <div className="px-0 py-5 sm:pr-6" key={colIndex}>
                 {colArray.map((item, itemIndex) => (
                   <p className="text-white text-base" key={itemIndex}>
                     {item}
@@ -129,9 +130,9 @@ export default function About() {
               </div>
             ))}
           </div>
-          <div className="flex-1 px-4 pb-10 sm:pb-0">
+          <div className="pb-10 sm:pb-0">
             {secondCol.map((colArray, colIndex) => (
-              <div className="flex-1 px-6 py-5" key={colIndex}>
+              <div className="px-0 py-5 sm:px-6" key={colIndex}>
                 {colArray.map((item, itemIndex) => (
                   <p className="text-white text-base" key={itemIndex}>
                     {item || <br />}
@@ -140,8 +141,8 @@ export default function About() {
               </div>
             ))}
           </div>
-          <div className="flex-1 pl-4">
-            <p className="text-white text-base pl-6 py-5">{thirdCol}</p>
+          <div>
+            <p className="text-white text-base px-0 sm:pl-6 py-5">{thirdCol}</p>
           </div>
         </div>
       </div>

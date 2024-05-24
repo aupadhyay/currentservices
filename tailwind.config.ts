@@ -43,8 +43,8 @@ const config: Config = {
 }
 
 export const screens = {
-  sm: 640,
-  md: 768,
+  sm: 706,
+  md: 900,
   lg: 1024,
   xl: 2580,
 }
