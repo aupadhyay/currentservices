@@ -12,6 +12,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
         <link rel="manifest" href="./site.webmanifest" />
         <meta name="theme-color" content="#4a4a4a" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
       </Head>
       <Component {...pageProps} />
     </>
