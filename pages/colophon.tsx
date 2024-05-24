@@ -116,11 +116,11 @@ export default function About() {
       }
       colophon={true}
     >
-      <div className="justify-center py-28 items-center sm:h-full sm:px-[10%]">
+      <div className="justify-center py-28 items-center sm:h-full sm:px-[16.66%]">
         <div className="grid grid-cols-1 sm:grid-cols-3">
-          <div className="flex-1 px-4 pb-10 sm:pb-0">
+          <div className="flex-1 pr-4 pb-10 sm:pb-0">
             {firstCol.map((colArray, colIndex) => (
-              <div className="flex-1 px-6 py-5" key={colIndex}>
+              <div className="flex-1 pr-6 py-5" key={colIndex}>
                 {colArray.map((item, itemIndex) => (
                   <p className="text-white text-base" key={itemIndex}>
                     {item}
@@ -140,8 +140,8 @@ export default function About() {
               </div>
             ))}
           </div>
-          <div className="flex-1 px-4">
-            <p className="text-white text-base px-6 py-5">{thirdCol}</p>
+          <div className="flex-1 pl-4">
+            <p className="text-white text-base pl-6 py-5">{thirdCol}</p>
           </div>
         </div>
       </div>

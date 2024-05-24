@@ -157,7 +157,7 @@ export default function Layout({
 
       <div
         className={clsx(
-          "sm:bottom-20 z-20 w-full sm:px-20 px-10 bottom-10",
+          "sm:bottom-[70px] z-20 w-full sm:px-20 px-10 bottom-10",
           colophon || about ? "relative sm:fixed" : "fixed"
         )}
       >
