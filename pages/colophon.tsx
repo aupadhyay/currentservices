@@ -82,7 +82,6 @@ export default function About() {
 
   // Function to check if the screen width is below a certain threshold
   const checkScreenWidth = () => {
-    console.log("width: ", window.innerWidth)
     setIsMobile(window.innerWidth < screens.sm) // Adjust the threshold as needed
   }
 
