@@ -49,12 +49,12 @@ const SlideComponent = ({
           controls={false}
           muted
           loop
-          className="w-full h-full sm:object-cover"
+          className="w-full h-full object-cover"
           src={url}
         />
       )
     } else {
-      return <img className="w-full h-full sm:object-cover" src={url} />
+      return <img className="w-full h-full object-cover" src={url} />
     }
   }
 
