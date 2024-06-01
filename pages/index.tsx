@@ -24,7 +24,7 @@ function Splash({
   return (
     <div
       className={clsx(
-        "z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-screen flex justify-center items-center",
+        "z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-dvh flex justify-center items-center",
         className
       )}
       style={style}

@@ -132,7 +132,7 @@ export default function Layout({
       className={clsx(
         "w-full relative",
         color && `bg-${color}`,
-        colophon || about ? "h-full sm:h-screen" : "h-screen",
+        colophon || about ? "h-full sm:h-dvh" : "h-dvh",
         className
       )}
       style={{
