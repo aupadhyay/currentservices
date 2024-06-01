@@ -154,24 +154,32 @@ const ProjectPage = ({
   const [slideNumber, setSlideNumber] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  const nextSlide = (currProject: IProject) => {
-    if (scrollRef.current === null) return
-    scrollRef.current.scrollBy({
-      top: window.innerHeight,
+  const nextSlide = (currProject: IProject, currSlideNum: number) => {
+    if (currSlideNum + 1 >= currProject.slides.length) return // Check if it's the last slide
+
+    const nextSlideElement = scrollRef.current?.children[
+      currSlideNum + 1
+    ] as HTMLElement
+
+    nextSlideElement?.scrollIntoView({
       behavior: "smooth",
+      block: "start",
     })
-    setSlideNumber((old) =>
-      old + 1 > currProject.slides.length - 1 ? old : old + 1
-    )
+
+    setSlideNumber((slideNum) => slideNum + 1)
   }
 
-  const prevSlide = () => {
-    if (scrollRef.current === null) return
-    scrollRef.current.scrollBy({
-      top: -window.innerHeight,
+  const prevSlide = (currSlideNum: number) => {
+    if (currSlideNum === 0) return
+
+    const prevSlideElement = scrollRef.current?.children[
+      currSlideNum - 1
+    ] as HTMLElement
+
+    prevSlideElement?.scrollIntoView({
       behavior: "smooth",
     })
-    setSlideNumber((old) => (old - 1 < 0 ? old : old - 1))
+    setSlideNumber((slideNum) => slideNum - 1)
   }
 
   useEffect(() => {
@@ -193,11 +201,11 @@ const ProjectPage = ({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
         e.preventDefault()
-        nextSlide(project)
+        nextSlide(project, slideNumber)
       }
       if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
         e.preventDefault()
-        prevSlide()
+        prevSlide(slideNumber)
       }
     }
     window.addEventListener("keydown", handleKeyDown)
@@ -205,7 +213,7 @@ const ProjectPage = ({
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [scrollRef])
+  }, [scrollRef, slideNumber])
 
   useEffect(() => {
     setSlideNumber(0)
@@ -225,8 +233,8 @@ const ProjectPage = ({
     <Slide
       slide={slide}
       key={index}
-      prevSlide={prevSlide}
-      nextSlide={() => nextSlide(project)}
+      prevSlide={() => prevSlide(index)}
+      nextSlide={() => nextSlide(project, index)}
     />
   ))
 
