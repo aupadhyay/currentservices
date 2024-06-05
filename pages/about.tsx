@@ -63,7 +63,7 @@ export default function About() {
           &nbsp;our offices.
         </p>
 
-        <p className="block sm:hidden text-white text-2xl sm:text-3xl">
+        <p className="block sm:hidden text-white text-[21px] sm:text-3xl">
           Current Services is an interdisciplinary design and strategy practice
           founded in 2020. Operating as a core group that often extends into a
           broader network, we employ an array of methodologies to support every
