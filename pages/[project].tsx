@@ -156,6 +156,21 @@ const ProjectPage = ({
 }) => {
   const [slideNumber, setSlideNumber] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Function to check if the screen width is below a certain threshold
+  const checkScreenWidth = () => {
+    setIsMobile(window.innerWidth < screens.sm) // Adjust the threshold as needed
+  }
+
+  useEffect(() => {
+    checkScreenWidth() // Initial check
+    window.addEventListener("resize", checkScreenWidth)
+    return () => {
+      window.removeEventListener("resize", checkScreenWidth)
+    }
+  }, [])
+
 
   const nextSlide = (currProject: IProject, currSlideNum: number) => {
     if (currSlideNum + 1 >= currProject.slides.length) return // Check if it's the last slide
@@ -229,21 +244,6 @@ const ProjectPage = ({
       </div>
     )
   }
-  const [isMobile, setIsMobile] = useState(false)
-
-  // Function to check if the screen width is below a certain threshold
-  const checkScreenWidth = () => {
-    setIsMobile(window.innerWidth < screens.sm) // Adjust the threshold as needed
-  }
-
-  useEffect(() => {
-    checkScreenWidth() // Initial check
-    window.addEventListener("resize", checkScreenWidth)
-    return () => {
-      window.removeEventListener("resize", checkScreenWidth)
-    }
-  }, [])
-
 
   const currentSlide = project.slides[slideNumber]
 
