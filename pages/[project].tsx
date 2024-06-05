@@ -10,6 +10,8 @@ import clsx from "clsx"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Link from "next/link"
 import { memo, useEffect, useRef, useState } from "react"
+import { screens } from "@/tailwind.config"
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects: IProject[] = await getProjects()
@@ -29,6 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const projects = await getProjects()
   return { props: { project, projects } }
 }
+
 
 const SlideComponent = ({
   slide,
@@ -93,7 +96,7 @@ const SlideComponent = ({
           <Media url={BASE_URL + slide.largeDesktopBg.data.attributes.url} />
         )}
       </div>
-      <div className="px-10 sm:pl-[16.67%] pt-[40%] sm:pt-[20%]">
+      <div className="px-10 sm:pl-[16.67%] pt-[30%] sm:pt-[20%]">
         <p
           className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
         >
@@ -104,7 +107,7 @@ const SlideComponent = ({
           <div className="grid grid-cols-3 mt-10">
             <div className="col-span-1">
               <p
-                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book text-[16px] sm:text-2xl leading-[135%] tracking-[-0.21px]`}
               >
                 Services rendered
               </p>
@@ -115,7 +118,7 @@ const SlideComponent = ({
                 .map((service, index) => (
                   <p
                     key={index}
-                    className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
+                    className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book text-[16px] sm:text-2xl  leading-[135%] tracking-[-0.21px]`}
                   >
                     {service}
                   </p>
@@ -127,7 +130,7 @@ const SlideComponent = ({
                 .map((service, index) => (
                   <p
                     key={index}
-                    className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-2xl text-[21px] leading-[135%] tracking-[-0.21px]`}
+                    className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book text-[16px] sm:text-2xl leading-[135%] tracking-[-0.21px]`}
                   >
                     {service}
                   </p>
@@ -226,6 +229,21 @@ const ProjectPage = ({
       </div>
     )
   }
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Function to check if the screen width is below a certain threshold
+  const checkScreenWidth = () => {
+    setIsMobile(window.innerWidth < screens.sm) // Adjust the threshold as needed
+  }
+
+  useEffect(() => {
+    checkScreenWidth() // Initial check
+    window.addEventListener("resize", checkScreenWidth)
+    return () => {
+      window.removeEventListener("resize", checkScreenWidth)
+    }
+  }, [])
+
 
   const currentSlide = project.slides[slideNumber]
 
@@ -251,7 +269,7 @@ const ProjectPage = ({
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
-          <Link href="/" className="cursor-[inherit] text-2xl">
+          <Link href="/" className="hidden sm:block cursor-[inherit] text-2xl">
             Index
           </Link>
         </h1>
@@ -262,7 +280,7 @@ const ProjectPage = ({
           )}
         >
           <span
-            className="cursor-[inherit] text-2xl"
+            className="cursor-[inherit] text-[16px] sm:text-2xl "
             onClick={() => {
               window.location.href = `/${nextProject.slug}`
             }}
@@ -279,7 +297,7 @@ const ProjectPage = ({
       top={
         <Header
           color={currentSlide.textColor}
-          showIndex={slideNumber != project.slides.length - 1}
+          showIndex={slideNumber != project.slides.length - 1 || isMobile}
         />
       }
       bottom={bottom}
