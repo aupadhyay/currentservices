@@ -96,7 +96,7 @@ const SlideComponent = ({
           <Media url={BASE_URL + slide.largeDesktopBg.data.attributes.url} />
         )}
       </div>
-      <div className="px-10 sm:pl-[16.67%] pt-[30%] sm:pt-[20%]">
+      <div className="hidden sm:block px-10 sm:pl-[16.67%] pt-[30%] sm:pt-[20%]">
         <p
           className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
         >
@@ -139,7 +139,55 @@ const SlideComponent = ({
           </div>
         )}
       </div>
-    </div>
+
+
+      <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[60%] sm:pt-[20%]">
+        <p
+          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
+        >
+          {slide.description}
+        </p>
+
+        {slide.services && (
+          <div className="block sm:hidden mt-10">
+            <div className="col-span-1">
+              <p
+                className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book text-[16px] sm:text-2xl leading-[135%] tracking-[-0.21px]`}
+              >
+                Services rendered
+              </p>
+            </div>
+            <br/>
+            <div className="grid grid-cols-2">
+              <div className="col-span-1">
+                {slide.services
+                  .slice(0, Math.ceil(slide.services.length / 2))
+                  .map((service, index) => (
+                    <p
+                      key={index}
+                      className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book text-[16px] sm:text-2xl  leading-[135%] tracking-[-0.21px]`}
+                    >
+                      {service}
+                    </p>
+                  ))}
+              </div>
+              <div className="col-span-1">
+                {slide.services
+                  .slice(Math.ceil(slide.services.length / 2))
+                  .map((service, index) => (
+                    <p
+                      key={index}
+                      className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book text-[16px] sm:text-2xl leading-[135%] tracking-[-0.21px]`}
+                    >
+                      {service}
+                    </p>
+                  ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+  </div>
   )
 }
 
