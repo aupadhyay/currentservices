@@ -36,7 +36,7 @@ export default function About() {
         <div>
           <h1
             className={clsx(
-              "font-favorit font-regular text-[32px] text-white transition-colors ease-in-out duration-500"
+              "font-favorit font-regular text-[21px] sm:text-[32px] text-white transition-colors ease-in-out duration-500"
             )}
           >
             <Link href="/" className="cursor-[inherit]">
@@ -92,7 +92,7 @@ export default function About() {
                   )
                   .map((word, index) => (
                     <p
-                      className="text-white text-[20px] lg:text-xl mt-1"
+                      className="text-white text-[20px] sm:text-xl mt-1"
                       key={index}
                     >
                       {word}
@@ -132,7 +132,7 @@ export default function About() {
                     (columnIndex + 1) * wordsPerTitleList
                   )
                   .map((word, index) => (
-                    <p className="text-white text-xl mt-1 sm:mt-0" key={index}>
+                    <p className="text-white text-[21px] mt-1 sm:mt-0" key={index}>
                       {word}
                     </p>
                   ))}
@@ -143,7 +143,7 @@ export default function About() {
                   )
                   .map((word, index) => (
                     <p
-                      className="text-white text-xl pl-20 mt-1 sm:mt-0"
+                      className="text-white text-[21px] pl-20 mt-1 sm:mt-0"
                       key={index}
                     >
                       {word}
