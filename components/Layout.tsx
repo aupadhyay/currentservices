@@ -17,7 +17,7 @@ export function Header({
       <div>
         <h1
           className={clsx(
-            "font-favorit font-regular text-[21px] transition-colors ease-in-out duration-500",
+            "font-favorit font-regular text-[16px] transition-colors ease-in-out duration-500",
             `text-${color}`
           )}
         >
