@@ -30,7 +30,7 @@ export default function About() {
   return (
     <Layout
       color="[#FF242F]"
-      top={<Header showIndex={false} showColophon={true} />}
+      top={<Header showIndex={false} showColophon={true} about={true} />}
       cursor="angled"
       bottom={
         <div>

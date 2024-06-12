@@ -7,10 +7,12 @@ export function Header({
   color = "white",
   showIndex = true,
   showColophon = false,
+  about = false,
 }: {
   color?: string
   showIndex?: boolean
   showColophon?: boolean
+  about?: boolean
 }) {
   return (
     <div className="flex justify-between w-full">
@@ -21,9 +23,9 @@ export function Header({
             `text-${color}`
           )}
         >
-          <Link href="/about" className="tracking-[-0.01em] cursor-[inherit]">
+         <Link href={about ? "/" : "/about"} className="tracking-[-0.01em] cursor-[inherit]">
             Current Services
-          </Link>
+         </Link>
         </h1>
       </div>
       {showIndex && (
