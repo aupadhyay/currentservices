@@ -153,7 +153,7 @@ const SlideComponent = ({
         )}
       {/* Not Final Slide Mobile */}
         {!slide.services && (
-          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-96 sm:pt-[20%]">
+          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[40%] sm:pt-[20%]">
           <p
             className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
           >
@@ -164,7 +164,7 @@ const SlideComponent = ({
       
         {/* Final Slide Mobile */}
         {slide.services && (
-          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[40%] sm:pt-[20%]">
+          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[35%] sm:pt-[20%]">
           <p
             className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
           >
