@@ -96,14 +96,26 @@ const SlideComponent = ({
           <Media url={BASE_URL + slide.largeDesktopBg.data.attributes.url} />
         )}
       </div>
-      <div className="hidden sm:block px-10 sm:pl-[16.67%] pt-[30%] sm:pt-[20%]">
-        <p
-          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
-        >
-          {slide.description}
-        </p>
 
+      {/* Not Final Slide */}
+      {!slide.services && (
+          <div className="hidden sm:block px-10 sm:pl-[16.67%] pt-[30%] sm:pt-80">
+          <p
+            className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
+          >
+            {slide.description}
+          </p>  
+          </div>
+      )}
+      
+      {/* Final Slide */}
         {slide.services && (
+          <div className="hidden sm:block px-10 sm:pl-[16.67%] pt-[30%] sm:pt-[20%]">
+          <p
+            className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
+          >
+            {slide.description}
+          </p>  
           <div className="grid grid-cols-3 mt-10">
             <div className="col-span-1">
               <p
@@ -137,18 +149,27 @@ const SlideComponent = ({
                 ))}
             </div>
           </div>
+          </div>
         )}
-      </div>
-
-
-      <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[60%] sm:pt-[20%]">
-        <p
-          className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
-        >
-          {slide.description}
-        </p>
-
+      {/* Not Final Slide Mobile */}
+        {!slide.services && (
+          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-96 sm:pt-[20%]">
+          <p
+            className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
+          >
+            {slide.description}
+          </p>
+          </div>
+          )}
+      
+        {/* Final Slide Mobile */}
         {slide.services && (
+          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[40%] sm:pt-[20%]">
+          <p
+            className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
+          >
+            {slide.description}
+          </p>
           <div className="block sm:hidden mt-10">
             <div className="col-span-1">
               <p
@@ -185,8 +206,9 @@ const SlideComponent = ({
               </div>
             </div>
           </div>
+          </div>
         )}
-      </div>
+      
   </div>
   )
 }
