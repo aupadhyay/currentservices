@@ -13,6 +13,20 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: `${0}` },
+          '100%': { opacity: `${1}`},
+        },
+        fadeOut: {
+          '0%': { opacity: `${0}` },
+          '100%': { opacity: `${1}`},
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn 1s ease-in-out',
+        fadeOut: 'fadeOut 1s ease-in-out',
+      },
     },
     fontFamily: {
       favorit: ['"CS Favorit"'],
