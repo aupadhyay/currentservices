@@ -36,7 +36,7 @@ export default function About() {
         <div>
           <h1
             className={clsx(
-              "font-favorit font-regular text-[21px] sm:text-[32px] text-white transition-colors ease-in-out duration-500"
+              "font-favorit font-regular text-[21px] sm:text-[21px] text-white transition-colors ease-in-out duration-500"
             )}
           >
             <Link href="/" className="cursor-[inherit]">
