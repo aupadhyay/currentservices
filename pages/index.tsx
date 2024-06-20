@@ -1,9 +1,9 @@
-import { BASE_URL, IProject, getProjects } from "@/api"
-import Layout, { Header } from "@/components/Layout"
-import clsx from "clsx"
-import { GetStaticProps } from "next"
-import Link from "next/link"
-import { CSSProperties, useEffect, useState } from "react"
+import { BASE_URL, IProject, getProjects } from '@/api'
+import Layout, { Header } from '@/components/Layout'
+import clsx from 'clsx'
+import { GetStaticProps } from 'next'
+import Link from 'next/link'
+import { CSSProperties, useEffect, useState } from 'react'
 
 // TODO: consider making these configurable in Strapi, along with splash screen bg + text. lots of strapi customizability basically
 const SPLASH_DURATION = 2100
@@ -24,7 +24,7 @@ function Splash({
   return (
     <div
       className={clsx(
-        "z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-dvh flex justify-center items-center",
+        'z-[100] bg-[#FF242F] absolute top-0 bottom-0 w-full h-dvh flex justify-center items-center',
         className
       )}
       style={style}
@@ -44,12 +44,12 @@ export default function Home({ projects }: { projects: IProject[] }) {
     if (
       window &&
       window.sessionStorage &&
-      window.sessionStorage.getItem("firstLoad") == null
+      window.sessionStorage.getItem('firstLoad') == null
     ) {
       setFirstLoad(true)
       const timer = setTimeout(() => {
         setClearSplash(true)
-        window.sessionStorage.setItem("firstLoad", "false")
+        window.sessionStorage.setItem('firstLoad', 'false')
         setTimeout(() => {
           setFirstLoad(false)
         }, SPLASH_FADE_DURATION)
@@ -58,17 +58,17 @@ export default function Home({ projects }: { projects: IProject[] }) {
       const handleClick = () => {
         clearTimeout(timer)
         setClearSplash(true)
-        window.sessionStorage.setItem("firstLoad", "false")
+        window.sessionStorage.setItem('firstLoad', 'false')
         setTimeout(() => {
           setFirstLoad(false)
         }, SPLASH_FADE_DURATION)
       }
 
-      window.addEventListener("click", handleClick)
+      window.addEventListener('click', handleClick)
 
       return () => {
         clearTimeout(timer)
-        window.removeEventListener("click", handleClick)
+        window.removeEventListener('click', handleClick)
       }
     }
   }, [])
@@ -96,7 +96,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
   const indexTabs = (
     <div
       className={clsx(
-        "font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse"
+        'font-favorit font-book text-[32px] flex sm:flex-row flex-col-reverse'
       )}
     >
       {projects.map((project) => (
@@ -108,15 +108,15 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           }}
           onMouseLeave={() => setSelected(projects[0])}
           className={clsx(
-            "select-none text-xl w-fit cursor-[inherit] px-3",
+            'select-none text-xl w-fit cursor-[inherit] px-3',
             `text-${textColor}`
           )}
         >
           <span
             className={clsx(
-              "w-fit hover:underline underline-offset-10 decoration-2	transition-colors ease-in-out duration-500",
+              'w-fit hover:underline underline-offset-10 decoration-2	transition-colors ease-in-out duration-500',
               selected.slug === project.slug &&
-                "underline underline-offset-10 decoration-2"
+                'underline underline-offset-10 decoration-2'
             )}
           >
             {project.title}
@@ -141,7 +141,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
         controls={false}
         className="absolute top-1/2 left-1/2 min-w-full min-h-full max-w-none sm:object-cover"
         style={{
-          transform: "translate(-50%, -50%)",
+          transform: 'translate(-50%, -50%)',
           zIndex: selected.slug === project.slug ? 1 : 0,
         }}
         src={BASE_URL + project.hoverVideo.data.attributes.url}

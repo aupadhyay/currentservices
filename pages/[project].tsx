@@ -4,14 +4,13 @@ import {
   ISlide,
   getProjectBySlug,
   getProjects,
-} from "@/api"
-import { Header, default as Layout } from "@/components/Layout"
-import clsx from "clsx"
-import { GetStaticPaths, GetStaticProps } from "next"
-import Link from "next/link"
-import { memo, useEffect, useRef, useState } from "react"
-import { screens } from "@/tailwind.config"
-
+} from '@/api'
+import { Header, default as Layout } from '@/components/Layout'
+import { screens } from '@/tailwind.config'
+import clsx from 'clsx'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import Link from 'next/link'
+import { memo, useEffect, useRef, useState } from 'react'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects: IProject[] = await getProjects()
@@ -21,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: { project: project.slug },
     }))
 
-  return { paths, fallback: "blocking" }
+  return { paths, fallback: 'blocking' }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -31,7 +30,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const projects = await getProjects()
   return { props: { project, projects } }
 }
-
 
 const SlideComponent = ({
   slide,
@@ -44,7 +42,7 @@ const SlideComponent = ({
 }) => {
   // TODO: make add this to strapi instead
   const Media = ({ url }: { url: string }) => {
-    if (url.endsWith(".mp4") || url.endsWith(".mov")) {
+    if (url.endsWith('.mp4') || url.endsWith('.mov')) {
       return (
         <video
           autoPlay
@@ -99,23 +97,23 @@ const SlideComponent = ({
 
       {/* Not Final Slide */}
       {!slide.services && (
-          <div className="hidden sm:block px-10 sm:pl-[16.67%] sm:pt-80">
+        <div className="hidden sm:block px-10 sm:pl-[16.67%] sm:pt-80">
           <p
             className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
           >
             {slide.description}
-          </p>  
-          </div>
+          </p>
+        </div>
       )}
-      
+
       {/* Final Slide */}
-        {slide.services && (
-          <div className="hidden sm:block px-10 sm:pl-[16.67%] sm:pt-[20%]">
+      {slide.services && (
+        <div className="hidden sm:block px-10 sm:pl-[16.67%] sm:pt-[20%]">
           <p
             className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
           >
             {slide.description}
-          </p>  
+          </p>
           <div className="grid grid-cols-3 mt-10">
             <div className="col-span-1">
               <p
@@ -149,22 +147,22 @@ const SlideComponent = ({
                 ))}
             </div>
           </div>
-          </div>
-        )}
+        </div>
+      )}
       {/* Not Final Slide Mobile */}
-        {!slide.services && (
-          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-64 sm:pt-[20%]">
+      {!slide.services && (
+        <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-64 sm:pt-[20%]">
           <p
             className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
           >
             {slide.description}
           </p>
-          </div>
-          )}
-      
-        {/* Final Slide Mobile */}
-        {slide.services && (
-          <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[32%] sm:pt-[20%]">
+        </div>
+      )}
+
+      {/* Final Slide Mobile */}
+      {slide.services && (
+        <div className="block sm:hidden px-10 sm:pl-[16.67%] pt-[32%] sm:pt-[20%]">
           <p
             className={`text-${slide.textColor} sm:w-3/4 font-favorit font-book sm:text-3xl text-[21px] leading-[135%] tracking-[-0.21px] `}
           >
@@ -178,7 +176,7 @@ const SlideComponent = ({
                 Services rendered
               </p>
             </div>
-            <br/>
+            <br />
             <div className="grid grid-cols-2">
               <div className="col-span-1">
                 {slide.services
@@ -206,10 +204,9 @@ const SlideComponent = ({
               </div>
             </div>
           </div>
-          </div>
-        )}
-      
-  </div>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -235,12 +232,11 @@ const ProjectPage = ({
 
   useEffect(() => {
     checkScreenWidth() // Initial check
-    window.addEventListener("resize", checkScreenWidth)
+    window.addEventListener('resize', checkScreenWidth)
     return () => {
-      window.removeEventListener("resize", checkScreenWidth)
+      window.removeEventListener('resize', checkScreenWidth)
     }
   }, [])
-
 
   const nextSlide = (currProject: IProject, currSlideNum: number) => {
     if (currSlideNum + 1 >= currProject.slides.length) return // Check if it's the last slide
@@ -250,8 +246,8 @@ const ProjectPage = ({
     ] as HTMLElement
 
     nextSlideElement?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+      behavior: 'smooth',
+      block: 'start',
     })
 
     setSlideNumber((slideNum) => slideNum + 1)
@@ -265,7 +261,7 @@ const ProjectPage = ({
     ] as HTMLElement
 
     prevSlideElement?.scrollIntoView({
-      behavior: "smooth",
+      behavior: 'smooth',
     })
     setSlideNumber((slideNum) => slideNum - 1)
   }
@@ -284,22 +280,22 @@ const ProjectPage = ({
       }
       prevSlideNumber = newSlideNumber
     }
-    scrollRef.current.addEventListener("scroll", handleScroll)
+    scrollRef.current.addEventListener('scroll', handleScroll)
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         e.preventDefault()
         nextSlide(project, slideNumber)
       }
-      if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
         e.preventDefault()
         prevSlide(slideNumber)
       }
     }
-    window.addEventListener("keydown", handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [scrollRef, slideNumber])
 
@@ -335,7 +331,7 @@ const ProjectPage = ({
       <div className="flex flex-row justify-between transition-colors">
         <h1
           className={clsx(
-            "font-favorit font-book text-[32px]",
+            'font-favorit font-book text-[32px]',
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >
@@ -345,7 +341,7 @@ const ProjectPage = ({
         </h1>
         <h1
           className={clsx(
-            "font-favorit font-book text-2xl",
+            'font-favorit font-book text-2xl',
             currentSlide.textColor && `text-${currentSlide.textColor}`
           )}
         >

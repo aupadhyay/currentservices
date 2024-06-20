@@ -1,27 +1,27 @@
-import clsx from "clsx"
-import Link from "next/link"
-import Layout, { Header } from "../components/Layout"
+import clsx from 'clsx'
+import Link from 'next/link'
+import Layout, { Header } from '../components/Layout'
 
 export default function About() {
-  const serviceTitles = ["Idea", "Brand", "Content", "Growth"]
+  const serviceTitles = ['Idea', 'Brand', 'Content', 'Growth']
 
   const services = [
-    "Research",
-    "Strategy",
-    "Consulting",
-    "IA/UX",
-    "Concepting",
-    "Visual Identity",
-    "Naming",
-    "Positioning",
-    "Print/Packaging",
-    "Digital",
-    "Film/Motion",
-    "Spatial",
-    "Market Entry",
-    "Venture Planning",
-    "Capital Strategy",
-    "Forecasting",
+    'Research',
+    'Strategy',
+    'Consulting',
+    'IA/UX',
+    'Concepting',
+    'Visual Identity',
+    'Naming',
+    'Positioning',
+    'Print/Packaging',
+    'Digital',
+    'Film/Motion',
+    'Spatial',
+    'Market Entry',
+    'Venture Planning',
+    'Capital Strategy',
+    'Forecasting',
   ]
   const wordsPerTitleList = 1
   const wordsPerList = 4
@@ -36,7 +36,7 @@ export default function About() {
         <div>
           <h1
             className={clsx(
-              "font-favorit font-regular text-[21px] sm:text-[21px] text-white transition-colors ease-in-out duration-500"
+              'font-favorit font-regular text-[21px] sm:text-[21px] text-white transition-colors ease-in-out duration-500'
             )}
           >
             <Link href="/" className="cursor-[inherit]">
@@ -53,7 +53,7 @@ export default function About() {
           founded in 2020. Operating as a core group that often extends into a
           broader network, we employ an array of methodologies to support every
           phase of business building with the goal of bringing change-minded
-          ideas to life. To talk to us about a collaborative project, please{" "}
+          ideas to life. To talk to us about a collaborative project, please{' '}
           <a
             className="border-b cursor-pointer text-decoration-none"
             href="mailto:studio@currentservices.com"
@@ -70,7 +70,7 @@ export default function About() {
           phase of business building with the goal of bringing change-minded
           ideas to life. <br />
           <br />
-          To talk to us about a collaborative project, please{" "}
+          To talk to us about a collaborative project, please{' '}
           <a
             className="border-b cursor-pointer text-decoration-none"
             href="mailto:studio@currentservices.com"
@@ -132,7 +132,10 @@ export default function About() {
                     (columnIndex + 1) * wordsPerTitleList
                   )
                   .map((word, index) => (
-                    <p className="text-white text-[21px] mt-1 sm:mt-0" key={index}>
+                    <p
+                      className="text-white text-[21px] mt-1 sm:mt-0"
+                      key={index}
+                    >
                       {word}
                     </p>
                   ))}

@@ -1,4 +1,4 @@
-export const BASE_URL = "https://cs.axu.sh"
+export const BASE_URL = 'https://cs.axu.sh'
 const API_URL = `${BASE_URL}/api`
 
 export type IMedia = {
@@ -11,21 +11,21 @@ export type IMedia = {
   }
 }
 
-export type ICursor = "normal" | "angled" | "vertical"
+export type ICursor = 'normal' | 'angled' | 'vertical'
 
 export type IProject = {
   id: string
   slug: string
   title: string
   hoverVideo: IMedia
-  indexTextColor: "black" | "white"
+  indexTextColor: 'black' | 'white'
   slides: ISlide[]
 }
 
 export type ISlide = {
   id: string
   description: string // Slide description. Renders if provided
-  textColor: "white" | "black" // Text color for all text
+  textColor: 'white' | 'black' // Text color for all text
   desktopBg: IMedia // Desktop background
   mobileBg: IMedia // Mobile background
   largeDesktopBg: IMedia //Large Desktop background
@@ -37,18 +37,18 @@ export type ISlide = {
 }
 
 // Constants
-export const splash = "© 2024 Current Services & All Parties Mentioned Herein"
+export const splash = '© 2024 Current Services & All Parties Mentioned Herein'
 const aboutDescription =
-  "Current  Services is an interdisciplinary design and strategy practice founded in 2020. Operating as a core group that often extends into a broader network, we employ an array of methodologies to support every phase of business building with the goal of bringing change-minded ideas to life. To talk to us about a collaborative project, please email our offices."
+  'Current  Services is an interdisciplinary design and strategy practice founded in 2020. Operating as a core group that often extends into a broader network, we employ an array of methodologies to support every phase of business building with the goal of bringing change-minded ideas to life. To talk to us about a collaborative project, please email our offices.'
 const aboutCategories = {
-  Idea: ["Research", "Strategy", "Consulting", "IA/UX"],
-  Branch: ["Concepting", "Visual Identity", "Naming", "Positioning"],
-  Content: ["Print/Packaging", "Digital", "Film/Motion", "Spatial"],
+  Idea: ['Research', 'Strategy', 'Consulting', 'IA/UX'],
+  Branch: ['Concepting', 'Visual Identity', 'Naming', 'Positioning'],
+  Content: ['Print/Packaging', 'Digital', 'Film/Motion', 'Spatial'],
   Growth: [
-    "Market Entry",
-    "Venture Planning",
-    "Capital Strategy",
-    "Forecasting",
+    'Market Entry',
+    'Venture Planning',
+    'Capital Strategy',
+    'Forecasting',
   ],
 }
 
@@ -68,7 +68,7 @@ const get = async (url: string) => {
 
 const getProjects = async (options: { includeSlides?: boolean } = {}) => {
   const { includeSlides } = options
-  const populate = includeSlides ? "slides.cover" : ""
+  const populate = includeSlides ? 'slides.cover' : ''
   const project = await get(
     `${API_URL}/projects?populate=hoverVideo&populate=${populate}`
   )
