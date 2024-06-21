@@ -48,7 +48,7 @@ export default function About() {
       about={true}
     >
       <div className="px-10 sm:px-20 lg:px-[16.66%] py-32 flex flex-col justify-center h-full animate-fadeIn">
-        <p className="hidden sm:block text-white text-2xl w-full lg:w-5/6 ">
+        <p className="hidden sm:block text-white text-2xl w-full lg:w-5/6 font-favorit font-book">
           Current Services is an interdisciplinary design and strategy practice
           founded in 2020. Operating as a core group that often extends into a
           broader network, we employ an array of methodologies to support every
@@ -63,7 +63,7 @@ export default function About() {
           &nbsp;our offices.
         </p>
 
-        <p className="block sm:hidden text-white text-[21px] sm:text-3xl">
+        <p className="block sm:hidden text-white text-[21px] sm:text-3xl font-favorit font-book">
           Current Services is an interdisciplinary design and strategy practice
           founded in 2020. Operating as a core group that often extends into a
           broader network, we employ an array of methodologies to support every
