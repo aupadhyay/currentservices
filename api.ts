@@ -66,9 +66,12 @@ const get = async (url: string) => {
   }
 }
 
-const getProjects = async (options: { includeSlides?: boolean } = {}) => {
-  const { includeSlides } = options
-  const populate = includeSlides ? 'slides.cover' : ''
+const getProjects = async (options: { includeMetadata?: boolean } = {}) => {
+  const { includeMetadata } = options
+  const populate = includeMetadata
+    ? 'slides.desktopBg,slides.mobileBg,slides.largeDesktopBg'
+    : ''
+
   const project = await get(
     `${API_URL}/projects?populate=hoverVideo&populate=${populate}`
   )
@@ -81,7 +84,7 @@ const getProjectById = async (id: string) => {
 
 const getProjectBySlug = async (slug: string) => {
   const projects = await get(
-    `${API_URL}/projects?filters[slug][$eq]=${slug}&populate=slides.desktopBg,slides.mobileBg,slides.largeDesktopBg`
+    `${API_URL}/projects?filters[slug][$eq]=${slug}&populate=hoverVideo&populate=slides.desktopBg,slides.mobileBg,slides.largeDesktopBg`
   )
   if (projects.data.length === 0) {
     return null

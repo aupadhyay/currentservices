@@ -217,9 +217,11 @@ const Slide = memo(SlideComponent, (prevProps, nextProps) => {
 const ProjectPage = ({
   project,
   projects,
+  showNav = true,
 }: {
   project: IProject
   projects: IProject[]
+  showNav?: boolean
 }) => {
   const [slideNumber, setSlideNumber] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -254,7 +256,10 @@ const ProjectPage = ({
   }
 
   const prevSlide = (currSlideNum: number) => {
-    if (currSlideNum === 0) return
+    if (currSlideNum === 0) {
+      // TODO: need this to animate back to index page
+      return
+    }
 
     const prevSlideElement = scrollRef.current?.children[
       currSlideNum - 1
@@ -361,10 +366,12 @@ const ProjectPage = ({
   return (
     <Layout
       top={
-        <Header
-          color={currentSlide.textColor}
-          showIndex={slideNumber != project.slides.length - 1 || isMobile}
-        />
+        showNav && (
+          <Header
+            color={currentSlide.textColor}
+            showIndex={slideNumber != project.slides.length - 1 || isMobile}
+          />
+        )
       }
       bottom={bottom}
       scrollRef={scrollRef}

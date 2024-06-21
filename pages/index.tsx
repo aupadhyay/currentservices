@@ -2,15 +2,16 @@ import { BASE_URL, IProject, getProjects } from '@/api'
 import Layout, { Header } from '@/components/Layout'
 import clsx from 'clsx'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
-import { CSSProperties, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { CSSProperties, useEffect, useRef, useState } from 'react'
+import ProjectPage from './[project]'
 
 // TODO: consider making these configurable in Strapi, along with splash screen bg + text. lots of strapi customizability basically
 const SPLASH_DURATION = 2100
 const SPLASH_FADE_DURATION = 600
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getProjects({ includeSlides: false })
+  const projects = await getProjects({ includeMetadata: true })
   return { props: { projects } }
 }
 
@@ -92,6 +93,12 @@ export default function Home({ projects }: { projects: IProject[] }) {
 export const Index = ({ projects }: { projects: IProject[] }) => {
   const [selected, setSelected] = useState<IProject>(projects[0])
   const textColor = selected.indexTextColor
+  const [clicked, setClicked] = useState(false)
+
+  const currPageRef = useRef<HTMLDivElement>(null)
+  const nextPageRef = useRef<HTMLDivElement>(null)
+
+  const router = useRouter()
 
   const indexTabs = (
     <div
@@ -100,13 +107,24 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
       )}
     >
       {projects.map((project) => (
-        <Link
-          href={`/${project.slug}`}
+        <a
           key={project.slug}
+          href={`/${project.slug}`}
           onMouseEnter={() => {
             setSelected(project)
           }}
           onMouseLeave={() => setSelected(projects[0])}
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.replace(`/${project.slug}`)
+            if (currPageRef.current) {
+              currPageRef.current.style.transform = 'translateY(-20%)'
+            }
+            if (nextPageRef.current) {
+              nextPageRef.current.style.transform = 'translateY(-100%)'
+            }
+            setClicked(true)
+          }}
           className={clsx(
             'select-none text-xl w-fit cursor-[inherit] px-3',
             `text-${textColor}`
@@ -121,13 +139,9 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           >
             {project.title}
           </span>
-        </Link>
+        </a>
       ))}
     </div>
-  )
-
-  const header = (selected: IProject) => (
-    <Header color={selected.indexTextColor} showIndex={false} />
   )
 
   const videos = (selected: IProject) => {
@@ -150,9 +164,38 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
   }
 
   return (
-    <Layout top={header(selected)} bottom={indexTabs} cursor="angled">
-      <div className="w-full h-full relative overflow-hidden">
-        {videos(selected)}
+    <Layout
+      top={
+        <Header
+          color={
+            clicked ? selected.slides[0].textColor : selected.indexTextColor
+          }
+          showIndex={!clicked}
+        />
+      }
+      bottom={!clicked ? indexTabs : null}
+      textColor={
+        !clicked ? selected.indexTextColor : selected.slides[0].textColor
+      }
+      cursor={!clicked ? 'angled' : selected.slides[0].cursor}
+      className="overflow-hidden"
+    >
+      <div
+        ref={currPageRef}
+        className="w-full snap-start h-full transition-transform ease-in-out duration-[1200ms]"
+      >
+        <div className="w-full h-full relative overflow-hidden">
+          {videos(selected)}
+        </div>
+      </div>
+
+      <div className="w-full h-full relative">
+        <div
+          ref={nextPageRef}
+          className="w-full h-[100vh] absolute top-0 left-0 transition-transform ease-in-out duration-[1000ms]"
+        >
+          <ProjectPage project={selected} projects={projects} showNav={false} />
+        </div>
       </div>
     </Layout>
   )
