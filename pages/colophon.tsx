@@ -78,7 +78,7 @@ export default function About() {
       cursor="angled"
       bottom={
         <div>
-          <h1 className="font-favorit font-regular text-[21px] text-white transition-colors ease-in-out duration-500">
+          <h1 className="font-favorit font-regular text-[21px] sm:text-[28px] text-white transition-colors ease-in-out duration-500">
             <Link
               href="/"
               className="cursor-[inherit] hover:border-b-2 sm:hover:border-b-0"
