@@ -124,7 +124,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
               const idx = projects.findIndex((p) => p.slug === project.slug)
               const child = nextPageRef.current.children[idx] as HTMLDivElement
               if (child) {
-                child.style.transform = 'translateY(-100%)'
+                child.style.transform = 'translateY(-100dvh)'
               }
             }
             setTimeout(() => {
