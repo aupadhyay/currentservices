@@ -81,7 +81,7 @@ export default function About() {
         </p>
 
         <div className="animate-fadeIn">
-          {/* Desktop */}
+          {/* Desktop  */}
           <div className="hidden sm:block">
             <div className="grid grid-cols-1 sm:grid-cols-4 mt-14">
               {[...Array(numColumns)].map((_, columnIndex) => (
@@ -93,7 +93,7 @@ export default function About() {
                     )
                     .map((word, index) => (
                       <p
-                        className="text-white text-[20px] sm:text-xl mt-1"
+                        className="text-white text-[20px] lg:text-xl mt-1"
                         key={index}
                       >
                         {word}
