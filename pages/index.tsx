@@ -116,14 +116,20 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           onMouseLeave={() => setSelected(projects[0])}
           onClick={(e) => {
             e.preventDefault()
-            window.location.replace(`/${project.slug}`)
+            setClicked(true)
             if (currPageRef.current) {
               currPageRef.current.style.transform = 'translateY(-20%)'
             }
             if (nextPageRef.current) {
-              nextPageRef.current.style.transform = 'translateY(-100%)'
+              const idx = projects.findIndex((p) => p.slug === project.slug)
+              const child = nextPageRef.current.children[idx] as HTMLDivElement
+              if (child) {
+                child.style.transform = 'translateY(-100%)'
+              }
             }
-            setClicked(true)
+            setTimeout(() => {
+              window.location.href = `/${project.slug}`
+            }, 1200)
           }}
           className={clsx(
             'select-none text-xl w-fit cursor-[inherit] px-3',
@@ -170,7 +176,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           color={
             clicked ? selected.slides[0].textColor : selected.indexTextColor
           }
-          showIndex={!clicked}
+          showIndex={clicked}
         />
       }
       bottom={!clicked ? indexTabs : null}
@@ -194,7 +200,19 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           ref={nextPageRef}
           className="w-full h-[100vh] absolute top-0 left-0 transition-transform ease-in-out duration-[1000ms]"
         >
-          <ProjectPage project={selected} projects={projects} showNav={false} />
+          {projects.map((project) => (
+            <div
+              key={project.slug}
+              className="w-full h-[100vh] absolute top-0 left-0 transition-transform ease-in-out duration-[1000ms]"
+            >
+              <ProjectPage
+                key={project.slug}
+                project={project}
+                projects={projects}
+                showNav={false}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </Layout>
