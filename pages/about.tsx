@@ -55,7 +55,7 @@ export default function About() {
           phase of business building with the goal of bringing change-minded
           ideas to life. To talk to us about a collaborative project, please{' '}
           <a
-            className="border-b cursor-pointer text-decoration-none"
+            className="underline underline-offset-4 decoration-2 cursor-pointer"
             href="mailto:studio@currentservices.com"
           >
             email

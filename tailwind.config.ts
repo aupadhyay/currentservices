@@ -50,6 +50,7 @@ const config: Config = {
       xl: '2580px',
     },
     textUnderlineOffset: {
+      '4': '4px',
       '10': '10px',
     },
   },
