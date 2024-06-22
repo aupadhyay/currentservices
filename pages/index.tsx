@@ -132,7 +132,7 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
             }, 1200)
           }}
           className={clsx(
-            'select-none text-xl w-fit cursor-[inherit] px-3',
+            'select-none text-xl w-fit cursor-[inherit] pr-6',
             `text-${textColor}`
           )}
         >
