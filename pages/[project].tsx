@@ -42,7 +42,7 @@ const SlideComponent = ({
 }) => {
   // TODO: make add this to strapi instead
   const Media = ({ url }: { url: string }) => {
-    if (url.endsWith('.mp4') || url.endsWith('.mov')) {
+    if (url.endsWith('.mp4') || url.endsWith('.mov') || url.endsWith(".webm")) {
       return (
         <video
           autoPlay
