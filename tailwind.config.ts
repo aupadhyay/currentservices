@@ -47,7 +47,7 @@ const config: Config = {
       sm: '706px',
       md: '900px',
       lg: '1024px',
-      xl: '2580px',
+      xl: '1800px',
     },
     textUnderlineOffset: {
       '4': '4px',
@@ -61,7 +61,7 @@ export const screens = {
   sm: 706,
   md: 900,
   lg: 1024,
-  xl: 2580,
+  xl: 1800,
 }
 
 export default config
