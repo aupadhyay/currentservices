@@ -44,19 +44,15 @@ const SlideComponent = ({
   const Media = ({ url }: { url: string }) => {
     if (url.endsWith('.mp4') || url.endsWith('.mov') || url.endsWith(".webm")) {
       return (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `<video className="w-full h-full object-cover"
+        <video
           autoPlay
           playsInline
           controls={false}
           muted
-          loop 
-        >
-          <source src=${url}/>
-        </video>`,
-      }}
-      />
+          loop
+          className="w-full h-full object-cover"
+          src={url}
+        />
       )
     } else {
       return <img className="w-full h-full object-cover" src={url} />
