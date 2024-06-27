@@ -11,6 +11,8 @@ import clsx from 'clsx'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
 import { memo, useEffect, useRef, useState } from 'react'
+import AutoPlayVideo from '../components/AutoPlayVideo';
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projects: IProject[] = await getProjects()
@@ -44,14 +46,9 @@ const SlideComponent = ({
   const Media = ({ url }: { url: string }) => {
     if (url.endsWith('.mp4') || url.endsWith('.mov') || url.endsWith(".webm")) {
       return (
-        <video
-          autoPlay
-          playsInline
-          controls={false}
-          muted
-          loop
+        <AutoPlayVideo
           className="w-full h-full object-cover"
-          src={url}
+          video={url}
         />
       )
     } else {
