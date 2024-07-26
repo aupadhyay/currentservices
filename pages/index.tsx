@@ -2,16 +2,15 @@ import { BASE_URL, IProject, getProjects } from '@/api'
 import Layout, { Header } from '@/components/Layout'
 import clsx from 'clsx'
 import { GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
-import { CSSProperties, useEffect, useRef, useState } from 'react'
-import ProjectPage from './[project]'
+import Link from 'next/link'
+import { CSSProperties, useEffect, useState } from 'react'
 
 // TODO: consider making these configurable in Strapi, along with splash screen bg + text. lots of strapi customizability basically
 const SPLASH_DURATION = 2100
 const SPLASH_FADE_DURATION = 600
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getProjects({ includeMetadata: true })
+  const projects = await getProjects({ includeSlides: false })
   return { props: { projects } }
 }
 
@@ -93,12 +92,6 @@ export default function Home({ projects }: { projects: IProject[] }) {
 export const Index = ({ projects }: { projects: IProject[] }) => {
   const [selected, setSelected] = useState<IProject>(projects[0])
   const textColor = selected.indexTextColor
-  const [clicked, setClicked] = useState(false)
-
-  const currPageRef = useRef<HTMLDivElement>(null)
-  const nextPageRef = useRef<HTMLDivElement>(null)
-
-  const router = useRouter()
 
   const indexTabs = (
     <div
@@ -107,30 +100,13 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
       )}
     >
       {projects.map((project) => (
-        <a
-          key={project.slug}
+        <Link
           href={`/${project.slug}`}
+          key={project.slug}
           onMouseEnter={() => {
             setSelected(project)
           }}
           onMouseLeave={() => setSelected(projects[0])}
-          onClick={(e) => {
-            e.preventDefault()
-            setClicked(true)
-            if (currPageRef.current) {
-              currPageRef.current.style.transform = 'translateY(-20%)'
-            }
-            if (nextPageRef.current) {
-              const idx = projects.findIndex((p) => p.slug === project.slug)
-              const child = nextPageRef.current.children[idx] as HTMLDivElement
-              if (child) {
-                child.style.transform = 'translateY(-100dvh)'
-              }
-            }
-            setTimeout(() => {
-              window.location.href = `/${project.slug}`
-            }, 1200)
-          }}
           className={clsx(
             'select-none text-xl w-fit cursor-[inherit] pr-6',
             `text-${textColor}`
@@ -145,9 +121,13 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
           >
             {project.title}
           </span>
-        </a>
+        </Link>
       ))}
     </div>
+  )
+
+  const header = (selected: IProject) => (
+    <Header color={selected.indexTextColor} showIndex={false} />
   )
 
   const videos = (selected: IProject) => {
@@ -170,50 +150,9 @@ export const Index = ({ projects }: { projects: IProject[] }) => {
   }
 
   return (
-    <Layout
-      top={
-        <Header
-          color={
-            clicked ? selected.slides[0].textColor : selected.indexTextColor
-          }
-          showIndex={clicked}
-        />
-      }
-      bottom={!clicked ? indexTabs : null}
-      textColor={
-        !clicked ? selected.indexTextColor : selected.slides[0].textColor
-      }
-      cursor={!clicked ? 'angled' : selected.slides[0].cursor}
-      className="overflow-hidden"
-    >
-      <div
-        ref={currPageRef}
-        className="w-full snap-start h-full transition-transform ease-in-out duration-[1200ms]"
-      >
-        <div className="w-full h-full relative overflow-hidden">
-          {videos(selected)}
-        </div>
-      </div>
-
-      <div className="w-full h-full relative">
-        <div
-          ref={nextPageRef}
-          className="w-full h-[100vh] absolute top-0 left-0 transition-transform ease-in-out duration-[1000ms]"
-        >
-          {projects.map((project) => (
-            <div
-              key={project.slug}
-              className="w-full h-[100vh] absolute top-0 left-0 transition-transform ease-in-out duration-[1000ms]"
-            >
-              <ProjectPage
-                key={project.slug}
-                project={project}
-                projects={projects}
-                showNav={false}
-              />
-            </div>
-          ))}
-        </div>
+    <Layout top={header(selected)} bottom={indexTabs} cursor="angled">
+      <div className="w-full h-full relative overflow-hidden">
+        {videos(selected)}
       </div>
     </Layout>
   )
